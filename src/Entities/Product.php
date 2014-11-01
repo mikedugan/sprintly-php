@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Contracts\SprintlyProduct;
+use Dugan\Sprintly\Entities\Contracts\SprintlyProduct;
 
 class Product implements SprintlyProduct
 {

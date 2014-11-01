@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Contracts\SprintlyAttachment;
+use Dugan\Sprintly\Entities\Contracts\SprintlyAttachment;
 
 class Attachment implements SprintlyAttachment
 {

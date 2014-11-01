@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Contracts\SprintlyAnnotation;
+use Dugan\Sprintly\Entities\Contracts\SprintlyAnnotation;
 
 class Annotation implements SprintlyAnnotation
 {

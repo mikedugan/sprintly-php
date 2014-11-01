@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Contracts\SprintlyTag;
+use Dugan\Sprintly\Entities\Contracts\SprintlyTag;
 
 class Tag implements SprintlyTag
 {

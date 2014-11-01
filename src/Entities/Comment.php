@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Contracts\SprintlyComment;
+use Dugan\Sprintly\Entities\Contracts\SprintlyComment;
 
 class Comment implements SprintlyComment
 {

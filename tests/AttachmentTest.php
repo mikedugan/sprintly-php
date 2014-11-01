@@ -16,7 +16,7 @@ class AttachmentTest extends BaseTest {
     */
     public function attachmentIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyAttachment', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyAttachment', $this->resource);
     }
 
     /**

@@ -16,7 +16,7 @@ class PersonTest extends BaseTest {
     */
     public function personIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyPerson', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyPerson', $this->resource);
     }
 
     /**

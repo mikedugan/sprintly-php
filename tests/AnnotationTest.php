@@ -16,7 +16,7 @@ class AnnotationTest extends BaseTest {
     */
     public function annotationIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyAnnotation', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyAnnotation', $this->resource);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Contracts\SprintlyPerson;
+use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
 
 class Person implements SprintlyPerson
 {

@@ -1,6 +1,6 @@
 <?php  namespace Dugan\Sprintly\Tests;
 
-use Dugan\Sprintly\Contracts\SprintlyObject;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {

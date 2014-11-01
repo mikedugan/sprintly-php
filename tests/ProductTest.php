@@ -16,7 +16,7 @@ class ProductTest extends BaseTest {
     */
     public function productIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyProduct', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyProduct', $this->resource);
     }
 
     /**

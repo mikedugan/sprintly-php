@@ -48,7 +48,7 @@ class Api
      */
     private function buildUrl(ApiEndpoint $endpoint, array $objects)
     {
-        /* @var $object \Dugan\Sprintly\Contracts\SprintlyObject */
+        /* @var $object \Dugan\Sprintly\Entities\Contracts\SprintlyObject */
         foreach($objects as $object) {
             foreach($object->getEndpointVars() as $key => $value) {
                 $endpoint->replace($key, $value);
