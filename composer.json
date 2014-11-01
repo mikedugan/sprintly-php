@@ -1,0 +1,25 @@
+{
+    "name": "dugan/springly-php",
+    "description": "Sprintly API wrapper for PHP 5.4+",
+    "require": {
+        "guzzlehttp/guzzle": "~5.0",
+        "mockery/mockery": "~0.9.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Dugan",
+            "email": "mike@mjdugan.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dugan\\Sprintly\\": "src/",
+            "Dugan\\Sprintly\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
+}
