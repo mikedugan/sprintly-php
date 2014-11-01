@@ -9,6 +9,7 @@ class Person implements SprintlyPerson
     private $firstName;
     private $lastName;
     private $email;
+    private $id;
 
     /**
      * @return mixed

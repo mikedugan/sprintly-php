@@ -159,6 +159,6 @@ class Item implements SprintlyItem
      */
     public function getEndpointVars()
     {
-        return ['item_number', $this->id];
+        return ['item_number', $this->number];
     }
 }
