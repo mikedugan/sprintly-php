@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Contracts; 
+<?php  namespace Dugan\Sprintly\Contracts;
 
 interface SprintlyProduct extends SprintlyObject
 {

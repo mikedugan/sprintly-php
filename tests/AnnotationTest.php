@@ -1,6 +1,6 @@
 <?php namespace Dugan\Sprintly\Tests;
 
-use Dugan\Sprintly\Annotation;
+use Dugan\Sprintly\Entities\Annotation;
 
 class AnnotationTest extends BaseTest {
     protected $resource;
@@ -17,5 +17,15 @@ class AnnotationTest extends BaseTest {
     public function annotationIsInstantiated()
     {
         $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyAnnotation', $this->resource);
+    }
+
+    /**
+    * @test
+    */
+    public function annotationHasEndpoints()
+    {
+        $this->hasCollectionEndpoint($this->resource);
+        $this->assertNull($this->resource->getSingleEndpoint());
+        $this->assertNull($this->resource->getEndpointVars());
     }
 }

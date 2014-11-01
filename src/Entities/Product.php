@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly; 
+<?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Contracts\SprintlyProduct;
@@ -35,11 +35,6 @@ class Product implements SprintlyProduct
         return $this->id;
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getAdmin()
     {
         return $this->admin;
@@ -55,7 +50,7 @@ class Product implements SprintlyProduct
      */
     public function getEndpointVars()
     {
-
+        return ['product_id' => $this->id];
     }
 
     /**
@@ -63,7 +58,7 @@ class Product implements SprintlyProduct
      */
     public function getSingleEndpoint()
     {
-
+        return ApiEndpoint::PRODUCT();
     }
 
     /**
@@ -71,6 +66,6 @@ class Product implements SprintlyProduct
      */
     public function getCollectionEndpoint()
     {
-
+        return ApiEndpoint::PRODUCTS();
     }
 }

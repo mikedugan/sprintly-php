@@ -1,5 +1,7 @@
 <?php namespace Dugan\Sprintly\Tests;
 
+use Dugan\Sprintly\Api\Api;
+
 class ApiTest extends BaseTest
 {
     protected $resource;
@@ -7,7 +9,7 @@ class ApiTest extends BaseTest
     public function setUp()
     {
         parent::setUp();
-        $this->resource = new \Dugan\Sprintly\Api\Api(null, 'foo@bar.com', 'abcdefg');
+        $this->resource = new Api(null, 'foo@bar.com', 'abcdefg');
     }
 
     /**

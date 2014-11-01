@@ -1,5 +1,6 @@
 <?php namespace Dugan\Sprintly\Tests;
-use Dugan\Sprintly\Item;
+
+use Dugan\Sprintly\Entities\Item;
 
 class ItemTest extends BaseTest {
     protected $resource;
@@ -16,5 +17,15 @@ class ItemTest extends BaseTest {
     public function itemIsInstantiated()
     {
         $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyItem', $this->resource);
+    }
+
+    /**
+     * @test
+     */
+    public function itemHasEndpoints()
+    {
+        $this->hasSingleEndpoint($this->resource);
+        $this->hasCollectionEndpoint($this->resource);
+        $this->assertTrue(is_array($this->resource->getEndpointVars()));
     }
 }

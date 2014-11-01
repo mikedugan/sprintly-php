@@ -1,6 +1,5 @@
 <?php  namespace Dugan\Sprintly\Api;
 
-use Dugan\Sprintly\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
 
 class Api

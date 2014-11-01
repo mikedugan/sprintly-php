@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Tests; 
+<?php  namespace Dugan\Sprintly\Tests;
 
 use Dugan\Sprintly\Contracts\SprintlyObject;
 

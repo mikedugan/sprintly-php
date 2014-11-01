@@ -1,6 +1,6 @@
 <?php namespace Dugan\Sprintly\Tests;
 
-use Dugan\Sprintly\Person;
+use Dugan\Sprintly\Entities\Person;
 
 class PersonTest extends BaseTest {
     protected $resource;
@@ -16,7 +16,7 @@ class PersonTest extends BaseTest {
     */
     public function personIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Person', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Contracts\SprintlyPerson', $this->resource);
     }
 
     /**
@@ -26,5 +26,6 @@ class PersonTest extends BaseTest {
     {
         $this->hasSingleEndpoint($this->resource);
         $this->hasCollectionEndpoint($this->resource);
+        $this->assertTrue(is_array($this->resource->getEndpointVars()));
     }
 }
