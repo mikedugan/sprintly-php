@@ -12,7 +12,14 @@ class ProductsRepository extends BaseRepository implements Repository
      */
     public function all()
     {
-        return json_decode($this->api->get($this->collectionEndpoint()));
+        $response = $this->api->get($this->collectionEndpoint());
+
+        foreach($response->json() as $object) {
+            $entity = $this->make();
+            $buf[] = $entity->fill($object);
+        }
+
+        return $buf;
     }
 
     public function create($name)
@@ -23,7 +30,8 @@ class ProductsRepository extends BaseRepository implements Repository
 
     public function delete($id)
     {
-        return $this->api->delete($this->singleEndpoint(), ['product_id' => $id]);
+        $buf = $this->api->delete($this->singleEndpoint(), ['product_id' => $id]);
+        return $this->decode($buf);
     }
 
     /**
@@ -46,6 +54,9 @@ class ProductsRepository extends BaseRepository implements Repository
 
     protected function retrieveSingleProduct($id)
     {
-        return $this->api->get($this->singleEndpoint(), [['product_id' => $id]]);
+        $entity = $this->make();
+        $response = $this->api->get($this->singleEndpoint(), [['product_id' => $id]]);
+        $entity->fill($response->json());
+        return $entity;
     }
 }

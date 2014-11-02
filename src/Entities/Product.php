@@ -3,12 +3,13 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyProduct;
 
-class Product implements SprintlyProduct
+class Product extends Entity implements SprintlyProduct
 {
-    private $name;
-    private $archived;
-    private $id;
-    private $admin;
+    protected $name = '';
+    protected $archived = '';
+    protected $id = 0;
+    protected $admin = false;
+    protected $created_at = '';
 
     public function getName()
     {
