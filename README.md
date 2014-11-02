@@ -5,6 +5,24 @@
 
 This is a library that wraps the Sprint.ly API for PHP 5.4+.
 
+## Quickstart
+
+This package requires [Composer](http://getcomposer.org)
+```
+composer require "dugan/sprintly-php": "dev-master"
+composer update
+```
+```
+$service = new \Dugan\Sprintly\SprintlyService('myemail@example.net', 'mySprintlyAuthKey');
+$products = $service->getAllProducts();
+foreach($products as $product) {
+    echo $product->getName()."\n";
+}
+
+//Do the same thing without using the helper:
+$products = $service->getProductsRepository()->all();
+```
+
 ## How it Works
 Under the hood, we use the Guzzle library to consume the Sprintly [API](https://sprintly.uservoice.com/knowledgebase/topics/15784-api)
 
