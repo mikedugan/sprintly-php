@@ -34,15 +34,6 @@ class ApiEndpoint
     private $endpoint;
 
     /**
-     * @param $key
-     * @return string
-     */
-    public function __get($key)
-    {
-        return self::$key;
-    }
-
-    /**
      * @param $method
      * @param $args
      * @return string
@@ -54,10 +45,9 @@ class ApiEndpoint
 
     /**
      * @param $method
-     * @param $args
      * @return ApiEndpoint
      */
-    public static function __callStatic($method, $args)
+    public static function __callStatic($method)
     {
         return new self($method);
     }

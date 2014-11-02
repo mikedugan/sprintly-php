@@ -67,7 +67,9 @@ class Api
                     $endpoint->replace($key, $value);
                 }
             } else {
-                $endpoint->replace($key, $value);
+                foreach($object as $k => $v) {
+                    $endpoint->replace($key, $value);
+                }
             }
         }
 
