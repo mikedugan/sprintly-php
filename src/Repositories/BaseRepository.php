@@ -28,7 +28,7 @@ abstract class BaseRepository
      */
     protected function make()
     {
-        return new $this->getModel();
+        return new $this->model;
     }
 
     protected function singleEndpoint()

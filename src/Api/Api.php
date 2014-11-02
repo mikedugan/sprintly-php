@@ -17,7 +17,9 @@ class Api
      */
     public function __construct(Client $client = null, $email = null, $authKey = null)
     {
-        $this->client = $client instanceof Client ? $client : new Client();
+        $this->client = $client instanceof Client ? $client : new Client([
+            'defaults' => ['auth' => [$email, $authKey]]
+        ]);
         $this->email = $email;
         $this->authKey =  $authKey;
     }
@@ -29,7 +31,6 @@ class Api
      */
     public function get($endpoint, $data = null)
     {
-        $data = array_merge($data, ['auth' => $this->authArray()]);
         $endpoint = $this->buildUrl($endpoint, $data);
         return $this->client->get($endpoint);
     }
@@ -42,7 +43,6 @@ class Api
      */
     public function post($endpoint, $urlData, $postData)
     {
-        $urlData = array_merge($urlData, ['auth' => $this->authArray()]);
         $endpoint = $this->buildUrl($endpoint, $urlData);
         return $this->client->post($endpoint, $postData);
     }
@@ -61,8 +61,9 @@ class Api
      * @param array       $objects
      * @return ApiEndpoint
      */
-    private function buildUrl(ApiEndpoint $endpoint, array $objects)
+    private function buildUrl(ApiEndpoint $endpoint, array $objects = null)
     {
+        if(! $objects) { return 'https://sprint.ly'. $endpoint->endpoint(); }
         /* @var $object SprintlyObject */
         foreach($objects as $object) {
             if($object instanceof SprintlyObject) {
@@ -76,52 +77,6 @@ class Api
             }
         }
 
-        return $endpoint;
-    }
-
-    /**
-     * @return null
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param $email
-     * @return void
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasAuthKey()
-    {
-        return ! is_null($this->authKey);
-    }
-
-    /**
-     * @param $authKey
-     * @return void
-     */
-    public function setAuthKey($authKey)
-    {
-        $this->authKey = $authKey;
-    }
-
-    /**
-     * @throws AuthException
-     * @return array
-     */
-    private function authArray()
-    {
-        if(empty($this->email) || empty($this->authKey)) {
-            throw new AuthException('Auth credentials missing');
-        }
-        return [$this->email, $this->authKey];
+        return 'https://sprint.ly'.$endpoint->endpoint();
     }
 }

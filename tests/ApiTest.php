@@ -18,7 +18,5 @@ class ApiTest extends BaseTest
     public function apiIsInstantiated()
     {
         $this->assertInstanceOf('Dugan\Sprintly\Api\Api', $this->resource);
-        $this->assertEquals('foo@bar.com', $this->resource->getEmail());
-        $this->assertTrue($this->resource->hasAuthKey());
     }
 }

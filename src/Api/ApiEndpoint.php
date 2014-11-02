@@ -53,12 +53,17 @@ class ApiEndpoint
         return new self($method);
     }
 
+    public function endpoint()
+    {
+        return $this->endpoint;
+    }
+
     /**
      * @param string $endpoint
      */
     private function __construct($endpoint)
     {
-        $this->endpoint = $endpoint;
+        $this->endpoint = constant('self::'.$endpoint);
     }
 
     public function replace($varKey, $varValue)

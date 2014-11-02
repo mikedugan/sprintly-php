@@ -12,7 +12,7 @@ class ProductsRepository extends BaseRepository implements Repository
      */
     public function all()
     {
-        return $this->api->get($this->collectionEndpoint());
+        return json_decode($this->api->get($this->collectionEndpoint()));
     }
 
     public function create($name)
@@ -46,6 +46,6 @@ class ProductsRepository extends BaseRepository implements Repository
 
     protected function retrieveSingleProduct($id)
     {
-        return $this->api->get($this->singleEndpoint(), ['product_id' => $id]);
+        return $this->api->get($this->singleEndpoint(), [['product_id' => $id]]);
     }
 }
