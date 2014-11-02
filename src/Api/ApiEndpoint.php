@@ -45,9 +45,10 @@ class ApiEndpoint
 
     /**
      * @param $method
+     * @param $args
      * @return ApiEndpoint
      */
-    public static function __callStatic($method)
+    public static function __callStatic($method, $args)
     {
         return new self($method);
     }
