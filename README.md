@@ -44,16 +44,41 @@ on a given product.
 
 How to instantiate the API with your credentials:
 
+`$service = new \Dugan\Sprintly\SprintlyService($myEmail, $myAuthkey);`
+
+All examples after this will assume `$service` has already been instantiated with your credentials.
 
 ### Products
 
 The Product is top-level entity in Sprintly. It has items, people, attachments, tags, etc related to it, which can all be accessed through the API.
 
-Retrieve all products:
+##### Retrieve all products:
 
-Retrieve a single product:
+*Using SprintlyService*
+`$service->getAllProducts()`
+*Using ProductRepository*
+`$service->getProductsRepository()->all()`
+
+Returns an array of `\Dugan\Sprintly\Entities\Product`
+
+
+##### Retrieve a single product:
+
+*Using SprintlyService*
+`$service->getProduct($id)`
+*Using ProductsRepository*
+`$service->getProductsRepository()->get($id)`
+
+Returns an instance of `\Dugan\Sprintly\Entities\Product`
 
 Retrieve a collection of products (but not all of them!):
+
+*Using SprintlyService*
+`$service->getProduct([$firstId, $secondId])`
+*Using ProductsRepository*
+`$service->getProductsRepository()->get([$firstId, $secondId])`
+
+Returns an array of `\Dugan\Sprintly\Entities\Product`
 
 ### Users
 
