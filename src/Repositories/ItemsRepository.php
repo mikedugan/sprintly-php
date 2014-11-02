@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Repositories; 
+<?php  namespace Dugan\Sprintly\Repositories;
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
