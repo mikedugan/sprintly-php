@@ -2,6 +2,7 @@
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\FutureResponse;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Ring\Future\FutureInterface;
@@ -28,19 +29,32 @@ class Api
 
     /**
      * @param      ApiEndpoint $endpoint
-     * @param null $data
+     * @param null             $data
+     * @throws SprintlyApiException
      * @return ResponseInterface
      */
     public function get($endpoint, $data = null)
     {
         $endpoint = $this->buildUrl($endpoint, $data);
-        return $this->client->get($endpoint);
+
+        try {
+            $response = $this->client->get($endpoint);
+        } catch(ClientException $e) {
+            throw new SprintlyApiException($e->getMessage(), $e->getCode());
+        }
+
+        if($response->getStatusCode() != 200) {
+            throw new SprintlyApiException($response->json(), $response->getStatusCode());
+        }
+
+        return $response;
     }
 
     /**
      * @param ApiEndpoint $endpoint
-     * @param $urlData
-     * @param $postData
+     * @param             $urlData
+     * @param             $postData
+     * @throws SprintlyApiException
      * @return ResponseInterface
      */
     public function post($endpoint, $urlData, $postData)
@@ -53,18 +67,40 @@ class Api
             $requestBody->setField($k, $v);
         }
 
-        return $this->client->send($request);
+        try {
+            $response = $this->client->send($request);
+        } catch(ClientException $e) {
+            throw new SprintlyApiException($e->getMessage(), $e->getCode());
+        }
+
+        if($response->getStatusCode() != 200) {
+            throw new SprintlyApiException($response->json(), $response->getStatusCode());
+        }
+
+        return $response;
     }
 
     /**
      * @param ApiEndpoint $endpoint
-     * @param string $data
+     * @param string      $data
+     * @throws SprintlyApiException
      * @return FutureResponse|ResponseInterface|FutureInterface|mixed|null
      */
     public function delete($endpoint, $data)
     {
         $endpoint = $this->buildUrl($endpoint, $data);
-        return $this->client->delete($endpoint);
+
+        try {
+            $response = $this->client->delete($endpoint);
+        } catch(ClientException $e) {
+            throw new SprintlyApiException($e->getMessage(), $e->getCode());
+        }
+
+        if($response->getStatusCode() != 200) {
+            throw new SprintlyApiException($response->json(), $response->getStatusCode());
+        }
+
+        return $response;
     }
 
     /**
