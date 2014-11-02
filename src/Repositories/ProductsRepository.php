@@ -26,14 +26,16 @@ class ProductsRepository extends BaseRepository implements Repository
 
     public function create($name)
     {
-        $ret = $this->api->post($this->collectionEndpoint(), null, ['name' => $name]);
-        return $ret;
+        $response = $this->api->post($this->collectionEndpoint(), null, ['name' => $name]);
+        $entity = $this->make()->fill($response->json());
+        return $entity;
     }
 
     public function delete($id)
     {
-        $buf = $this->api->delete($this->singleEndpoint(), ['product_id' => $id]);
-        return $this->decode($buf);
+        $response = $this->api->delete($this->singleEndpoint(), [['product_id' => $id]]);
+        $entity = $this->make()->fill($response->json());
+        return $entity;
     }
 
     /**

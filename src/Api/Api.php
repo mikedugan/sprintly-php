@@ -2,7 +2,9 @@
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
+use GuzzleHttp\Message\FutureResponse;
 use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Ring\Future\FutureInterface;
 
 class Api
 {
@@ -44,16 +46,25 @@ class Api
     public function post($endpoint, $urlData, $postData)
     {
         $endpoint = $this->buildUrl($endpoint, $urlData);
-        return $this->client->post($endpoint, $postData);
+        $request = $this->client->createRequest('POST', $endpoint);
+        $requestBody = $request->getBody();
+        foreach($postData as $k => $v) {
+
+            $requestBody->setField($k, $v);
+        }
+
+        return $this->client->send($request);
     }
 
     /**
      * @param ApiEndpoint $endpoint
+     * @param string $data
+     * @return FutureResponse|ResponseInterface|FutureInterface|mixed|null
      */
     public function delete($endpoint, $data)
     {
         $endpoint = $this->buildUrl($endpoint, $data);
-        return $this->client->delete($endpoint, $data);
+        return $this->client->delete($endpoint);
     }
 
     /**
