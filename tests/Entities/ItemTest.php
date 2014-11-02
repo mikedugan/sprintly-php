@@ -1,6 +1,7 @@
-<?php namespace Dugan\Sprintly\Tests;
+<?php namespace Dugan\Sprintly\Tests\Entities;
 
 use Dugan\Sprintly\Entities\Item;
+use Dugan\Sprintly\Tests\BaseTest;
 
 class ItemTest extends BaseTest {
     protected $resource;
