@@ -1,6 +1,6 @@
-<?php  namespace Dugan\Sprintly; 
+<?php  namespace Dugan\Sprintly;
 
-class SprintlyService 
+class SprintlyService
 {
     public function getPeopleRepository()
     {

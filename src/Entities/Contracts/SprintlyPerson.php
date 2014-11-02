@@ -4,7 +4,7 @@ interface SprintlyPerson extends SprintlyObject
 {
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getAdmin();
 

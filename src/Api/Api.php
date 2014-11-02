@@ -23,9 +23,9 @@ class Api
     }
 
     /**
-     * @param      $endpoint
+     * @param      ApiEndpoint $endpoint
      * @param null $data
-     * @return \GuzzleHttp\Message\FutureResponse|ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|mixed|null
+     * @return ResponseInterface
      */
     public function get($endpoint, $data = null)
     {
@@ -35,10 +35,10 @@ class Api
     }
 
     /**
-     * @param $endpoint
+     * @param ApiEndpoint $endpoint
      * @param $urlData
      * @param $postData
-     * @return \GuzzleHttp\Message\FutureResponse|ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|mixed|null
+     * @return ResponseInterface
      */
     public function post($endpoint, $urlData, $postData)
     {
@@ -47,6 +47,9 @@ class Api
         return $this->client->post($endpoint, $postData);
     }
 
+    /**
+     * @param ApiEndpoint $endpoint
+     */
     public function delete($endpoint, $data)
     {
         $endpoint = $this->buildUrl($endpoint, $data);

@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Repositories; 
+<?php  namespace Dugan\Sprintly\Repositories;
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
@@ -8,7 +8,7 @@ class ProductsRepository extends BaseRepository implements Repository
     protected $model = 'Dugan\Sprintly\Entities\Product';
 
     /**
-     * @return array
+     * @return \GuzzleHttp\Message\ResponseInterface
      */
     public function all()
     {
