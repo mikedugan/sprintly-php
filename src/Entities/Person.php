@@ -12,7 +12,7 @@ class Person implements SprintlyPerson
     private $id;
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getAdmin()
     {
