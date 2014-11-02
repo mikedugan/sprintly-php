@@ -1,10 +1,11 @@
 <?php  namespace Dugan\Sprintly\Repositories; 
 
-use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
+use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
 
-class PeopleRepository implements Repository
+class PeopleRepository extends BaseRepository implements Repository
 {
+    protected $model = 'Dugan\Sprintly\Entities\Person';
 
     /**
      * @return array
@@ -16,7 +17,7 @@ class PeopleRepository implements Repository
 
     /**
      * @param integer|array $ids
-     * @return SprintlyObject|array
+     * @return SprintlyPerson|array
      */
     public function get($ids)
     {
