@@ -1,7 +1,6 @@
 <?php  namespace Dugan\Sprintly\Repositories; 
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
-use Dugan\Sprintly\Repositories\Contracts\BaseRepository;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 
 class ProductsRepository extends BaseRepository implements Repository

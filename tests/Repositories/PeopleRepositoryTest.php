@@ -1,7 +1,9 @@
 <?php namespace Dugan\Sprintly\Tests\Repositories;
 
+use Dugan\Sprintly\Api\Api;
 use Dugan\Sprintly\Repositories\PeopleRepository;
 use Dugan\Sprintly\Tests\BaseTest;
+use GuzzleHttp\Client;
 
 class PeopleRepositoryTest extends BaseTest
 {
@@ -10,7 +12,7 @@ class PeopleRepositoryTest extends BaseTest
     public function setUp()
     {
         parent::setUp();
-        $this->resource = new PeopleRepository();
+        $this->resource = new PeopleRepository(new Api(new Client()));
     }
 
     /**
