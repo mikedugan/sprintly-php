@@ -1,7 +1,13 @@
 <?php  namespace Dugan\Sprintly\Entities; 
 
-class Entity
+abstract class Entity
 {
+    /**
+     * Mapper method that will fill the object using a key-value array of attributes
+     *
+     * @param $attributes
+     * @return $this
+     */
     public function fill($attributes)
     {
         foreach($attributes as $name => $value) {

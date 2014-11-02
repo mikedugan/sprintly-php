@@ -16,6 +16,7 @@ class PeopleRepository extends BaseRepository implements Repository
 
         $buf = [];
 
+        //build the array of actual objects from the response JSON
         foreach ($response->json() as $object) {
             $entity = $this->make();
             $buf[] = $entity->fill($object);
@@ -31,6 +32,7 @@ class PeopleRepository extends BaseRepository implements Repository
      */
     public function get($productId = null, $ids = null)
     {
+        //if we have an array, we want to build the collection of resources
         if (is_array($ids)) {
             $buf = [];
             foreach ($ids as $id) {
@@ -43,9 +45,17 @@ class PeopleRepository extends BaseRepository implements Repository
         return $this->retrieveSinglePerson($productId, $ids);
     }
 
+    /**
+     * Executes a GET operation for a single resource
+     *
+     * @param $productId
+     * @param $personId
+     * @return mixed
+     */
     public function retrieveSinglePerson($productId, $personId)
     {
         $response = $this->api->get($this->singleEndpoint(), [['product_id' => $productId], ['user_id' => $personId]]);
+        //converts the returned JSON to the appropriate entity
         $user = $this->make()->fill($response->json());
         return $user;
     }

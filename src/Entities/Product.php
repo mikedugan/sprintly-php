@@ -11,36 +11,60 @@ class Product extends Entity implements SprintlyProduct
     protected $admin = false;
     protected $created_at = '';
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param $name
+     * @return void
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getArchived()
     {
         return $this->archived;
     }
 
+    /**
+     * @param $archived
+     * @return void
+     */
     public function setArchived($archived)
     {
         $this->archived = $archived;
     }
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return bool
+     */
     public function getAdmin()
     {
         return $this->admin;
     }
 
+    /**
+     * @param $admin
+     * @return void
+     */
     public function setAdmin($admin)
     {
         $this->admin = $admin;

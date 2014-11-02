@@ -11,11 +11,18 @@ class Person extends Entity implements SprintlyPerson
     protected $email;
     protected $id;
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -98,7 +105,7 @@ class Person extends Entity implements SprintlyPerson
     }
 
     /**
-     * @return mixed
+     * @return ApiEndpoint
      */
     public function getCollectionEndpoint()
     {
@@ -106,7 +113,6 @@ class Person extends Entity implements SprintlyPerson
     }
 
     /**
-     * @param null $productId
      * @return array
      */
     public function getEndpointVars()

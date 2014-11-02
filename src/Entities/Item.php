@@ -18,121 +18,205 @@ class Item implements SprintlyItem
     private $assignedTo;
     private $type;
 
+    /**
+     * @return mixed
+     */
     public function getStatus()
     {
         return $this->status;
     }
 
+    /**
+     * @param $status
+     * @return void
+     */
     public function setStatus($status)
     {
         $this->status = $status;
     }
 
+    /**
+     * @return mixed
+     */
     public function getProduct()
     {
         return $this->product;
     }
 
+    /**
+     * @param $product
+     * @return void
+     */
     public function setProduct($product)
     {
         $this->product = $product;
     }
 
+    /**
+     * @return mixed
+     */
     public function getProgress()
     {
         return $this->progress;
     }
 
+    /**
+     * @param $progress
+     * @return void
+     */
     public function setProgress($progress)
     {
         $this->progress = $progress;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * @param $description
+     * @return void
+     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
+    /**
+     * @return mixed
+     */
     public function getTags()
     {
         return $this->tags;
     }
 
+    /**
+     * @param $tags
+     * @return void
+     */
     public function setTags($tags)
     {
         $this->tags = $tags;
     }
 
+    /**
+     * @return mixed
+     */
     public function getNumber()
     {
         return $this->number;
     }
 
+    /**
+     * @param $number
+     * @return void
+     */
     public function setNumber($number)
     {
         $this->number = $number;
     }
 
+    /**
+     * @return mixed
+     */
     public function getArchived()
     {
         return $this->archived;
     }
 
+    /**
+     * @param $archived
+     * @return void
+     */
     public function setArchived($archived)
     {
         $this->archived = $archived;
     }
 
+    /**
+     * @return mixed
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
+    /**
+     * @param $title
+     * @return void
+     */
     public function setTitle($title)
     {
         $this->title = $title;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCreatedBy()
     {
         return $this->createdBy;
     }
 
+    /**
+     * @param $createdBy
+     * @return void
+     */
     public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
     }
 
+    /**
+     * @return mixed
+     */
     public function getScore()
     {
         return $this->score;
     }
 
+    /**
+     * @param $score
+     * @return void
+     */
     public function setScore($score)
     {
         $this->score = $score;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAssignedTo()
     {
         return $this->assignedTo;
     }
 
+    /**
+     * @param $assignedTo
+     * @return void
+     */
     public function setAssignedTo($assignedTo)
     {
         $this->assignedTo = $assignedTo;
     }
 
+    /**
+     * @return mixed
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * @param $type
+     * @return void
+     */
     public function setType($type)
     {
         $this->type = $type;

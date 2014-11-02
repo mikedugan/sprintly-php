@@ -16,6 +16,7 @@ class ProductsRepository extends BaseRepository implements Repository
 
         $buf = [];
 
+        //build the array of actual objects from the response JSON
         foreach($response->json() as $object) {
             $entity = $this->make();
             $buf[] = $entity->fill($object);
@@ -24,6 +25,10 @@ class ProductsRepository extends BaseRepository implements Repository
         return $buf;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function create($name)
     {
         $response = $this->api->post($this->collectionEndpoint(), null, ['name' => $name]);
@@ -31,6 +36,10 @@ class ProductsRepository extends BaseRepository implements Repository
         return $entity;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function delete($id)
     {
         $response = $this->api->delete($this->singleEndpoint(), [['product_id' => $id]]);
@@ -44,6 +53,7 @@ class ProductsRepository extends BaseRepository implements Repository
      */
     public function get($ids)
     {
+        //if ids is an array, we want to build the collection of actual objects
         if(is_array($ids)) {
             $buffer = [];
             foreach($ids as $id) {
@@ -56,6 +66,12 @@ class ProductsRepository extends BaseRepository implements Repository
         return $this->retrieveSingleProduct($ids);
     }
 
+    /**
+     * Execute a GET operation and convert the result to an object
+     *
+     * @param $id
+     * @return SprintlyObject
+     */
     protected function retrieveSingleProduct($id)
     {
         $entity = $this->make();

@@ -53,6 +53,9 @@ class ApiEndpoint
         return new self($method);
     }
 
+    /**
+     * @return mixed
+     */
     public function endpoint()
     {
         return $this->endpoint;
@@ -66,6 +69,13 @@ class ApiEndpoint
         $this->endpoint = constant('self::'.$endpoint);
     }
 
+    /**
+     * Self-modifying method to replace placeholders in the endpoint with actual values
+     *
+     * @param $varKey
+     * @param $varValue
+     * @return void
+     */
     public function replace($varKey, $varValue)
     {
         $this->endpoint = str_replace('{'.$varKey.'}', $varValue, $this->endpoint);
