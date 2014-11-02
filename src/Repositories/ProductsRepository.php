@@ -14,7 +14,7 @@ class ProductsRepository extends BaseRepository implements Repository
     {
         $response = $this->api->get($this->collectionEndpoint());
 
-        $buf = array();
+        $buf = [];
 
         foreach($response->json() as $object) {
             $entity = $this->make();

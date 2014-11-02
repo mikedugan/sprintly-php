@@ -3,13 +3,23 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
 
-class Person implements SprintlyPerson
+class Person extends Entity implements SprintlyPerson
 {
-    private $admin;
-    private $firstName;
-    private $lastName;
-    private $email;
-    private $id;
+    protected $admin;
+    protected $first_name;
+    protected $last_name;
+    protected $email;
+    protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return boolean
@@ -33,7 +43,7 @@ class Person implements SprintlyPerson
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     /**
@@ -42,7 +52,7 @@ class Person implements SprintlyPerson
      */
     public function setFirstName($firstName)
     {
-        $this->firstName = $firstName;
+        $this->first_name = $firstName;
     }
 
     /**
@@ -50,7 +60,7 @@ class Person implements SprintlyPerson
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     /**
@@ -59,7 +69,7 @@ class Person implements SprintlyPerson
      */
     public function setLastName($lastName)
     {
-        $this->lastName = $lastName;
+        $this->last_name = $lastName;
     }
 
     /**
@@ -96,6 +106,7 @@ class Person implements SprintlyPerson
     }
 
     /**
+     * @param null $productId
      * @return array
      */
     public function getEndpointVars()

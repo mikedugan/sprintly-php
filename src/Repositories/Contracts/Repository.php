@@ -5,11 +5,6 @@ use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 interface Repository
 {
     /**
-     * @return array
-     */
-    public function all();
-
-    /**
      * @param integer|array $ids
      * @return SprintlyObject|array
      */

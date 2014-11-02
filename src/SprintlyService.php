@@ -1,6 +1,7 @@
 <?php  namespace Dugan\Sprintly;
 
 use Dugan\Sprintly\Api\Api;
+use Dugan\Sprintly\Repositories\PeopleRepository;
 use Dugan\Sprintly\Repositories\ProductsRepository;
 
 class SprintlyService
@@ -14,7 +15,7 @@ class SprintlyService
 
     public function getPeopleRepository()
     {
-
+        return new PeopleRepository($this->api);
     }
 
     public function getItemsRepository()
