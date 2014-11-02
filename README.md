@@ -6,8 +6,11 @@
 This is a library that wraps the Sprint.ly API for PHP 5.4+.
 
 API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
+
 :heavy_check_mark: Retrieve all products and individual products
+
 :interrobang: Create product
+
 :interrobang: Delete product
 
 
