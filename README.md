@@ -9,10 +9,27 @@ API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
 
 :heavy_check_mark: Retrieve all products and individual products
 
-:interrobang: Create product
+:heavy_check_mark: Create product
 
-:interrobang: Delete product
+:heavy_check_mark: Delete product
 
+:heavy_check_mark: Retrieve all people from product
+
+:heavy_check_mark: Retrieve person from product
+
+:interrobang: Add user to product
+
+:interrobang: Remove user from product
+
+:x: Update existing product
+
+:x: Retrieve a product's items
+
+:x: Retrieve a single item from a product
+
+:x: Add item to product
+
+:x: Retrieve children of an item
 
 ## Quickstart
 
@@ -55,8 +72,11 @@ The Product is top-level entity in Sprintly. It has items, people, attachments, 
 ##### Retrieve all products:
 
 *Using SprintlyService*
+
 `$service->getAllProducts()`
+
 *Using ProductRepository*
+
 `$service->getProductsRepository()->all()`
 
 Returns an array of `\Dugan\Sprintly\Entities\Product`
@@ -65,8 +85,11 @@ Returns an array of `\Dugan\Sprintly\Entities\Product`
 ##### Retrieve a single product:
 
 *Using SprintlyService*
+
 `$service->getProduct($id)`
+
 *Using ProductsRepository*
+
 `$service->getProductsRepository()->get($id)`
 
 Returns an instance of `\Dugan\Sprintly\Entities\Product`
@@ -74,8 +97,11 @@ Returns an instance of `\Dugan\Sprintly\Entities\Product`
 Retrieve a collection of products (but not all of them!):
 
 *Using SprintlyService*
+
 `$service->getProduct([$firstId, $secondId])`
+
 *Using ProductsRepository*
+
 `$service->getProductsRepository()->get([$firstId, $secondId])`
 
 Returns an array of `\Dugan\Sprintly\Entities\Product`
@@ -84,9 +110,13 @@ Returns an array of `\Dugan\Sprintly\Entities\Product`
 
 In the Sprintly verbiage, users are called people and person. The API wrapper reflects this. You can only retrieve people in the context of a product.
 
+To retrieve all users belonging to a product:
+
+`$service->getPeopleRepository()->all($productId)`
+
 To retrieve a single user:
 
-To retrieve all users belonging to a product:
+`$service->getPeopleRepository()->get($productId, $personId)`
 
 To add a user to a product:
 
