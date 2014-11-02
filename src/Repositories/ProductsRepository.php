@@ -17,7 +17,7 @@ class ProductsRepository extends BaseRepository implements Repository
         $buf = [];
 
         //build the array of actual objects from the response JSON
-        foreach($response->json() as $object) {
+        foreach ($response->json() as $object) {
             $entity = $this->make();
             $buf[] = $entity->fill($object);
         }
@@ -54,9 +54,9 @@ class ProductsRepository extends BaseRepository implements Repository
     public function get($ids)
     {
         //if ids is an array, we want to build the collection of actual objects
-        if(is_array($ids)) {
+        if (is_array($ids)) {
             $buffer = [];
-            foreach($ids as $id) {
+            foreach ($ids as $id) {
                 $buffer[] = $this->retrieveSingleProduct($id);
             }
 

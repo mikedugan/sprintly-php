@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Entities; 
+<?php  namespace Dugan\Sprintly\Entities;
 
 abstract class Entity
 {
@@ -10,8 +10,8 @@ abstract class Entity
      */
     public function fill($attributes)
     {
-        foreach($attributes as $name => $value) {
-            if(property_exists($this, $name)) {
+        foreach ($attributes as $name => $value) {
+            if (property_exists($this, $name)) {
                 $this->{$name} = $value;
             }
         }

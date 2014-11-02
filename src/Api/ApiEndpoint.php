@@ -66,7 +66,7 @@ class ApiEndpoint
      */
     private function __construct($endpoint)
     {
-        $this->endpoint = constant('self::'.$endpoint);
+        $this->endpoint = constant('self::' . $endpoint);
     }
 
     /**
@@ -78,6 +78,6 @@ class ApiEndpoint
      */
     public function replace($varKey, $varValue)
     {
-        $this->endpoint = str_replace('{'.$varKey.'}', $varValue, $this->endpoint);
+        $this->endpoint = str_replace('{' . $varKey . '}', $varValue, $this->endpoint);
     }
 }

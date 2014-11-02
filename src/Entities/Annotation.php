@@ -77,6 +77,7 @@ class Annotation implements SprintlyAnnotation
     {
         return $this->verb;
     }
+
     /**
      * @param $verb
      * @return void

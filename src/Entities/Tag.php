@@ -59,6 +59,7 @@ class Tag implements SprintlyTag
     {
         return $this->assignees;
     }
+
     /**
      * @param $assignees
      * @return void
