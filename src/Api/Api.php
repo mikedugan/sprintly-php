@@ -1,6 +1,8 @@
 <?php  namespace Dugan\Sprintly\Api;
 
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
+use GuzzleHttp\Message\ResponseInterface;
 
 class Api
 {
@@ -15,7 +17,7 @@ class Api
      */
     public function __construct(Client $client = null, $email = null, $authKey = null)
     {
-        $this->client = $client ?: new Client();
+        $this->client = $client instanceof Client ? $client : new Client();
         $this->email = $email;
         $this->authKey =  $authKey;
     }
@@ -23,22 +25,32 @@ class Api
     /**
      * @param      $endpoint
      * @param null $data
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|mixed|null
+     * @return \GuzzleHttp\Message\FutureResponse|ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|mixed|null
      */
-    private function get($endpoint, $data = null)
+    public function get($endpoint, $data = null)
     {
+        $data = array_merge($data, ['auth' => $this->authArray()]);
         $endpoint = $this->buildUrl($endpoint, $data);
-        return $this->client->get($endpoint, ['auth' => $this->authArray()]);
+        return $this->client->get($endpoint);
     }
 
     /**
      * @param $endpoint
-     * @param $data
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|mixed|null
+     * @param $urlData
+     * @param $postData
+     * @return \GuzzleHttp\Message\FutureResponse|ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|mixed|null
      */
-    private function post($endpoint, $data)
+    public function post($endpoint, $urlData, $postData)
     {
-        return $this->client->post($endpoint, $data);
+        $urlData = array_merge($urlData, ['auth' => $this->authArray()]);
+        $endpoint = $this->buildUrl($endpoint, $urlData);
+        return $this->client->post($endpoint, $postData);
+    }
+
+    public function delete($endpoint, $data)
+    {
+        $endpoint = $this->buildUrl($endpoint, $data);
+        return $this->client->delete($endpoint, $data);
     }
 
     /**
@@ -48,9 +60,13 @@ class Api
      */
     private function buildUrl(ApiEndpoint $endpoint, array $objects)
     {
-        /* @var $object \Dugan\Sprintly\Entities\Contracts\SprintlyObject */
+        /* @var $object SprintlyObject */
         foreach($objects as $object) {
-            foreach($object->getEndpointVars() as $key => $value) {
+            if($object instanceof SprintlyObject) {
+                foreach ($object->getEndpointVars() as $key => $value) {
+                    $endpoint->replace($key, $value);
+                }
+            } else {
                 $endpoint->replace($key, $value);
             }
         }
@@ -93,10 +109,14 @@ class Api
     }
 
     /**
+     * @throws AuthException
      * @return array
      */
     private function authArray()
     {
+        if(empty($this->email) || empty($this->authKey)) {
+            throw new AuthException('Auth credentials missing');
+        }
         return [$this->email, $this->authKey];
     }
 }
