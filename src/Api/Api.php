@@ -4,6 +4,8 @@ use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\FutureResponse;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Message\Response;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Ring\Future\FutureInterface;
 
@@ -24,7 +26,7 @@ class Api
             'defaults' => ['auth' => [$email, $authKey]]
         ]);
         $this->email = $email;
-        $this->authKey =  $authKey;
+        $this->authKey = $authKey;
     }
 
     /**
@@ -36,16 +38,8 @@ class Api
     public function get($endpoint, $data = null)
     {
         $endpoint = $this->buildUrl($endpoint, $data);
-
-        try {
-            $response = $this->client->get($endpoint);
-        } catch(ClientException $e) {
-            throw new SprintlyApiException($e->getMessage(), $e->getCode());
-        }
-
-        if($response->getStatusCode() != 200) {
-            throw new SprintlyApiException($response->json(), $response->getStatusCode());
-        }
+        $request = $this->client->createRequest('GET', $endpoint);
+        $response = $this->execute($request);
 
         return $response;
     }
@@ -62,20 +56,12 @@ class Api
         $endpoint = $this->buildUrl($endpoint, $urlData);
         $request = $this->client->createRequest('POST', $endpoint);
         $requestBody = $request->getBody();
-        foreach($postData as $k => $v) {
 
+        foreach ($postData as $k => $v) {
             $requestBody->setField($k, $v);
         }
 
-        try {
-            $response = $this->client->send($request);
-        } catch(ClientException $e) {
-            throw new SprintlyApiException($e->getMessage(), $e->getCode());
-        }
-
-        if($response->getStatusCode() != 200) {
-            throw new SprintlyApiException($response->json(), $response->getStatusCode());
-        }
+        $response = $this->execute($request);
 
         return $response;
     }
@@ -89,15 +75,18 @@ class Api
     public function delete($endpoint, $data)
     {
         $endpoint = $this->buildUrl($endpoint, $data);
+        $request = $this->client->createRequest('DELETE', $endpoint);
+        $response = $this->execute($request);
 
+        return $response;
+    }
+
+    protected function execute(Request $request)
+    {
         try {
-            $response = $this->client->delete($endpoint);
-        } catch(ClientException $e) {
+            $response = $this->client->send($request);
+        } catch (ClientException $e) {
             throw new SprintlyApiException($e->getMessage(), $e->getCode());
-        }
-
-        if($response->getStatusCode() != 200) {
-            throw new SprintlyApiException($response->json(), $response->getStatusCode());
         }
 
         return $response;
@@ -110,20 +99,22 @@ class Api
      */
     private function buildUrl(ApiEndpoint $endpoint, array $objects = null)
     {
-        if(! $objects) { return 'https://sprint.ly'. $endpoint->endpoint(); }
+        if (! $objects) {
+            return 'https://sprint.ly' . $endpoint->endpoint();
+        }
         /* @var $object SprintlyObject */
-        foreach($objects as $object) {
-            if($object instanceof SprintlyObject) {
+        foreach ($objects as $object) {
+            if ($object instanceof SprintlyObject) {
                 foreach ($object->getEndpointVars() as $key => $value) {
                     $endpoint->replace($key, $value);
                 }
             } else {
-                foreach($object as $key => $value) {
+                foreach ($object as $key => $value) {
                     $endpoint->replace($key, $value);
                 }
             }
         }
 
-        return 'https://sprint.ly'.$endpoint->endpoint();
+        return 'https://sprint.ly' . $endpoint->endpoint();
     }
 }
