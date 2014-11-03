@@ -1,6 +1,7 @@
 <?php  namespace Dugan\Sprintly\Repositories;
 
 use Dugan\Sprintly\Api\GuzzleQueryBuilder;
+use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 use GuzzleHttp\Query;
 
@@ -17,10 +18,21 @@ class ItemsRepository extends BaseRepository implements Repository
     {
         $response = $this->api->get($this->collectionEndpoint(),
             [['product_id' => $this->productId]],
-            ['status' => 'someday','backlog','in-progress','completed']
+            ['status' => 'someday', 'backlog', 'in-progress', 'completed']
         );
 
         return $this->buildCollection($response);
+    }
+
+    public function create(SprintlyItem $item)
+    {
+        $data = $item->toArray();
+        $response = $this->api->post($this->collectionEndpoint(),
+            [['product_id' => $this->productId]],
+            $data
+        );
+
+        return $this->make()->fill($response->json());
     }
 
     /**
@@ -31,7 +43,8 @@ class ItemsRepository extends BaseRepository implements Repository
      */
     protected function retrieveSingle($itemId)
     {
-        $response = $this->api->get($this->singleEndpoint(), [['product_id' => $this->productId], ['item_id' => $itemId]]);
+        $response = $this->api->get($this->singleEndpoint(),
+            [['product_id' => $this->productId], ['item_id' => $itemId]]);
         //converts the returned JSON to the appropriate entity
         $user = $this->make()->fill($response->json());
         return $user;

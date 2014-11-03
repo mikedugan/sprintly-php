@@ -3,12 +3,9 @@
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Message\FutureResponse;
 use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Query;
-use GuzzleHttp\Ring\Future\FutureInterface;
 
 /**
  * This is the core API class. This class is responsible for coordinating the GET/POST/DELETE methods
@@ -91,9 +88,12 @@ class Api
 
         //Iterate over the postData and assign it to the request body
         foreach ($postData as $k => $v) {
-            $requestBody->setField($k, $v);
+            if(! is_null($v)) {
+               $requestBody->setField($k, $v);
+            }
         }
 
+        $request->setBody($requestBody);
         $response = $this->execute($request);
 
         return $response;

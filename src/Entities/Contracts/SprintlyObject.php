@@ -18,4 +18,9 @@ interface SprintlyObject
      * @return array
      */
     public function getEndpointVars();
+
+    /**
+     * @return array
+     */
+    public function toArray();
 }

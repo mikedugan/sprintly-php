@@ -8,6 +8,7 @@ class Item extends Entity implements SprintlyItem
     protected $status;
     protected $product;
     protected $progress;
+    protected $story;
     protected $description;
     protected $tags;
     protected $number;
@@ -67,6 +68,36 @@ class Item extends Entity implements SprintlyItem
     public function setProgress($progress)
     {
         $this->progress = $progress;
+    }
+
+    public function getStoryWho()
+    {
+        return $this->story['who'];
+    }
+
+    public function setStoryWho($who)
+    {
+        $this->story['who'] = $who;
+    }
+
+    public function getStoryWhat()
+    {
+        return $this->story['what'];
+    }
+
+    public function setStoryWhat($what)
+    {
+       $this->story['what'] = $what;
+    }
+
+    public function getStoryWhy()
+    {
+        return $this->story['why'];
+    }
+
+    public function setStoryWhy($why)
+    {
+        $this->story['why'] = $why;
     }
 
     /**
@@ -244,5 +275,22 @@ class Item extends Entity implements SprintlyItem
     public function getEndpointVars()
     {
         return ['item_number', $this->number];
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $props = get_object_vars($this);
+        if(isset($props['story'])) {
+            unset($props['title']);
+            unset($props['story']);
+            $props['who'] = $this->story['who'];
+            $props['why'] = $this->story['why'];
+            $props['what'] = $this->story['what'];
+        }
+
+        return $props;
     }
 }
