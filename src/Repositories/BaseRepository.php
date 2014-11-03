@@ -20,6 +20,21 @@ abstract class BaseRepository
         $this->productId = $productId;
     }
 
+    public function get($ids = null)
+    {
+        //if we have an array, we want to build the collection of resources
+        if (is_array($ids)) {
+            $buf = [];
+            foreach ($ids as $id) {
+                $buf[] = $this->retrieveSingle($id);
+            }
+
+            return $buf;
+        }
+
+        return $this->retrieveSingle($ids);
+    }
+
     /**
      * @return mixed
      */

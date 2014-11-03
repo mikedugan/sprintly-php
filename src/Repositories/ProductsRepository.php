@@ -40,31 +40,12 @@ class ProductsRepository extends BaseRepository implements Repository
     }
 
     /**
-     * @param integer|array $ids
-     * @return SprintlyObject|array
-     */
-    public function get($ids)
-    {
-        //if ids is an array, we want to build the collection of actual objects
-        if (is_array($ids)) {
-            $buffer = [];
-            foreach ($ids as $id) {
-                $buffer[] = $this->retrieveSingleProduct($id);
-            }
-
-            return $buffer;
-        }
-
-        return $this->retrieveSingleProduct($ids);
-    }
-
-    /**
      * Execute a GET operation and convert the result to an object
      *
      * @param $id
      * @return SprintlyObject
      */
-    protected function retrieveSingleProduct($id)
+    protected function retrieveSingle($id)
     {
         $entity = $this->make();
         $response = $this->api->get($this->singleEndpoint(), [['product_id' => $id]]);
