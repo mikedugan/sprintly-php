@@ -1,5 +1,6 @@
 <?php  namespace Dugan\Sprintly\Repositories;
 
+use Dugan\Sprintly\Api\GuzzleQueryBuilder;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 use GuzzleHttp\Query;
 
@@ -23,31 +24,12 @@ class ItemsRepository extends BaseRepository implements Repository
     }
 
     /**
-     * @param integer|array $ids
-     * @return array|SprintlyItem
-     */
-    public function get($ids = null)
-    {
-        //if we have an array, we want to build the collection of resources
-        if (is_array($ids)) {
-            $buf = [];
-            foreach ($ids as $id) {
-                $buf[] = $this->retrieveSingleItem($this->productId, $id);
-            }
-
-            return $buf;
-        }
-
-        return $this->retrieveSingleItem($this->productId, $ids);
-    }
-
-    /**
      * Executes a GET operation for a single resource
      *
      * @param $itemId
      * @return mixed
      */
-    protected function retrieveSingleItem($itemId)
+    protected function retrieveSingle($itemId)
     {
         $response = $this->api->get($this->singleEndpoint(), [['product_id' => $this->productId], ['item_id' => $itemId]]);
         //converts the returned JSON to the appropriate entity
@@ -55,10 +37,9 @@ class ItemsRepository extends BaseRepository implements Repository
         return $user;
     }
 
-    public function offset($offset)
+    public function query()
     {
-        $this->query->set('offset', $offset);
-
+        $this->query = new GuzzleQueryBuilder();
         return $this;
     }
 
@@ -66,17 +47,7 @@ class ItemsRepository extends BaseRepository implements Repository
     {
         $response = $this->api->get($this->collectionEndpoint(),
             [['product_id' => $this->productId]],
-            $this->query
-        );
-
-        return $this->buildCollection($response);
-    }
-
-    public function getByStatus($status)
-    {
-        $response = $this->api->get($this->collectionEndpoint(),
-            [['product_id' => $this->productId]],
-            ['status' => $status]
+            $this->query->getQuery()
         );
 
         return $this->buildCollection($response);
@@ -84,19 +55,7 @@ class ItemsRepository extends BaseRepository implements Repository
 
     public function __call($method, $args)
     {
-        if(strpos($method, 'where') !== 0) {
-            throw new \Exception("Method {$method} does not exist", 500);
-        }
-
-        if(! $this->query instanceof Query) {
-            $this->query = new Query();
-        }
-
-        $method = explode('where', $method)[1];
-
-        $method = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $method));
-
-        $this->query->set($method, $args[0]);
+        $this->query->{$method}($args[0]);
 
         return $this;
     }
