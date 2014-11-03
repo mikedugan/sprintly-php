@@ -55,15 +55,6 @@ class ItemsRepository extends BaseRepository implements Repository
         return $user;
     }
 
-    public function query()
-    {
-        if(! $this->query) {
-            $this->query = new Query();
-        }
-
-        return $this;
-    }
-
     public function offset($offset)
     {
         $this->query->set('offset', $offset);

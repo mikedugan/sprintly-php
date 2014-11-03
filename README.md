@@ -23,11 +23,15 @@ API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
 
 :x: Update existing product
 
-:x: Retrieve a product's items
+:heavy_check_mark: Retrieve a product's items
+
+:interrobang: Perform lightweight queries of a product's items
 
 :x: Retrieve a single item from a product
 
 :x: Add item to product
+
+:x: Delete item from product
 
 :x: Retrieve children of an item
 
@@ -64,6 +68,27 @@ How to instantiate the API with your credentials:
 `$service = new \Dugan\Sprintly\SprintlyService($myEmail, $myAuthkey);`
 
 All examples after this will assume `$service` has already been instantiated with your credentials.
+
+### Common Functionality
+
+Instead of repeating the following code snippets several times, I will let it suffice to say that most
+repositories implement the two following methods, used in 3 different ways. We'll demonstrate with the
+PeopleRepository, but the same methods will exist on other repositories.
+
+To retrieve all of a resource (the index):
+
+`$service->getPeopleRepository()->all()`
+
+To retrieve a single resource (the GET):
+
+`$service->getPeopleRepository()->get($id)`
+
+To retrieve a collection of resources, but not all of them:
+
+`$service->getPeopleRepository()->get([$firstId, $secondId])`
+
+Note this will execute multiple HTTP requests, so when working with more than a couple resources,
+it is often more efficient to retrieve all resources and filter them locally.
 
 ### Products
 
@@ -106,27 +131,26 @@ Retrieve a collection of products (but not all of them!):
 
 Returns an array of `\Dugan\Sprintly\Entities\Product`
 
+### The Product ID
+
+Most of the entities represented by the Sprintly API are only accessible in the context of a product.
+
+Unless otherwise noted, from here on out you should assume all code examples are preceded by:
+
+`$service->setId($productId)`
+
+This will allow the service to automatically inject the product ID into the appropriate repositories
+before returning them back to you.
+
 ### Users
 
 In the Sprintly verbiage, users are called people and person. The API wrapper reflects this. You can only retrieve people in the context of a product.
-
-To retrieve all users belonging to a product:
-
-`$service->getPeopleRepository()->all($productId)`
-
-To retrieve a single user:
-
-`$service->getPeopleRepository()->get($productId, $personId)`
 
 To add a user to a product:
 
 ### Items
 
 Items are the stories, tasks, defects, etc that belong to a product. Again, these can only be retrieved in the context of a product.
-
-To retrieve all items:
-
-To retrieve a single item:
 
 To create a new item:
 
