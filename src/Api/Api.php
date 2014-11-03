@@ -105,7 +105,7 @@ class Api
      * @param ApiEndpoint $endpoint
      * @param string      $data
      * @throws SprintlyApiException
-     * @return FutureResponse|ResponseInterface|FutureInterface|mixed|null
+     * @return ResponseInterface
      */
     public function delete($endpoint, $data)
     {
@@ -124,7 +124,7 @@ class Api
      *
      * @param Request $request
      * @throws SprintlyApiException
-     * @return FutureResponse|ResponseInterface|FutureInterface|mixed|null
+     * @return ResponseInterface
      */
     protected function execute(Request $request)
     {
@@ -142,7 +142,7 @@ class Api
      *
      * @param ApiEndpoint $endpoint
      * @param array       $objects
-     * @return ApiEndpoint
+     * @return string
      */
     private function buildUrl(ApiEndpoint $endpoint, array $objects = null)
     {

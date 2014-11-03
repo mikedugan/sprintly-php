@@ -45,7 +45,7 @@ class SprintlyService
     }
 
     /**
-     * @return void
+     * @return ItemsRepository
      */
     public function getItemsRepository()
     {
@@ -69,7 +69,7 @@ class SprintlyService
     }
 
     /**
-     * @return void
+     * @return ItemsRepository
      */
     public function items()
     {

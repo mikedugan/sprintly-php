@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Api; 
+<?php  namespace Dugan\Sprintly\Api;
 
 use GuzzleHttp\Query;
 
