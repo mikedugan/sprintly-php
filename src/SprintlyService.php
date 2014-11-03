@@ -19,11 +19,18 @@ class SprintlyService
         $this->api = new Api(null, $email, $authKey);
     }
 
+    /**
+     * @return mixed
+     */
     public function getProductId()
     {
         return $this->productId;
     }
 
+    /**
+     * @param $productId
+     * @return void
+     */
     public function setProductId($productId)
     {
         $this->productId = $productId;
@@ -51,5 +58,29 @@ class SprintlyService
     public function getProductsRepository()
     {
         return new ProductsRepository($this->api, $this->productId);
+    }
+
+    /**
+     * @return ProductsRepository
+     */
+    public function products()
+    {
+        return $this->getProductsRepository();
+    }
+
+    /**
+     * @return void
+     */
+    public function items()
+    {
+        return $this->getItemsRepository();
+    }
+
+    /**
+     * @return PeopleRepository
+     */
+    public function people()
+    {
+        return $this->getPeopleRepository();
     }
 }
