@@ -7,25 +7,23 @@ This is a library that wraps the Sprint.ly API for PHP 5.4+.
 
 API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
 
-:heavy_check_mark: Retrieve all products and individual products
+:heavy_check_mark: Retrieve all, single, and collection of products
 
 :heavy_check_mark: Create product
 
 :heavy_check_mark: Delete product
 
-:heavy_check_mark: Retrieve all people from product
-
-:heavy_check_mark: Retrieve person from product
+:heavy_check_mark: Retrieve all, single, and collection of people from product
 
 :interrobang: Add user to product
 
 :interrobang: Remove user from product
 
-:x: Update existing product
+:interrobang: Update existing product
 
 :heavy_check_mark: Retrieve a product's items
 
-:interrobang: Perform lightweight queries of a product's items
+:heavy_check_mark: Perform lightweight queries of a product's items
 
 :x: Retrieve a single item from a product
 
@@ -90,6 +88,14 @@ To retrieve a collection of resources, but not all of them:
 Note this will execute multiple HTTP requests, so when working with more than a couple resources,
 it is often more efficient to retrieve all resources and filter them locally.
 
+There are also wrapper methods for retrieving an entity's repository through the service:
+
+`$service->products()->get($id)`
+
+`$service->items()->all()`
+
+etc
+
 ### Products
 
 The Product is top-level entity in Sprintly. It has items, people, attachments, tags, etc related to it, which can all be accessed through the API.
@@ -100,10 +106,6 @@ The Product is top-level entity in Sprintly. It has items, people, attachments, 
 
 `$service->getAllProducts()`
 
-*Using ProductRepository*
-
-`$service->getProductsRepository()->all()`
-
 Returns an array of `\Dugan\Sprintly\Entities\Product`
 
 
@@ -112,10 +114,6 @@ Returns an array of `\Dugan\Sprintly\Entities\Product`
 *Using SprintlyService*
 
 `$service->getProduct($id)`
-
-*Using ProductsRepository*
-
-`$service->getProductsRepository()->get($id)`
 
 Returns an instance of `\Dugan\Sprintly\Entities\Product`
 
