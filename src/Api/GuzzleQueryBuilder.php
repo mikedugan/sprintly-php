@@ -47,6 +47,4 @@ class GuzzleQueryBuilder
             throw new \Exception("Method {$method} does not exist", 500);
         }
     }
-
-
 }

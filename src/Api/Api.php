@@ -152,20 +152,36 @@ class Api
         }
 
         foreach ($objects as $object) {
-            if ($object instanceof SprintlyObject) {
-                //SprintlyObject defines it's own set of variable mappings for the endpoint
-                foreach ($object->getEndpointVars() as $key => $value) {
-                    //the endpoint has a self-modifying method to replace the placeholder
-                    $endpoint->replace($key, $value);
-                }
-            } else {
-                //In case you pass in a plain array of key-value pairs, we'll take care of that too
-                foreach ($object as $key => $value) {
-                    $endpoint->replace($key, $value);
-                }
-            }
+            $this->parseParameters($endpoint, $object);
         }
 
         return 'https://sprint.ly' . $endpoint->endpoint();
+    }
+
+    /**
+     * @param ApiEndpoint $endpoint
+     * @param             $object
+     * @return void
+     */
+    private function parseParameters(ApiEndpoint $endpoint, $object)
+    {
+        if ($object instanceof SprintlyObject) {
+            $object = $object->getEndpointVars();
+        }
+
+        $this->assignValues($endpoint, $object);
+    }
+
+    /**
+     * @param ApiEndpoint $endpoint
+     * @param             $object
+     * @return void
+     */
+    private function assignValues(ApiEndpoint $endpoint, $object)
+    {
+        foreach ($object as $key => $value) {
+            //the endpoint has a self-modifying method to replace the placeholder
+            $endpoint->replace($key, $value);
+        }
     }
 }
