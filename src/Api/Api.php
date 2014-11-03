@@ -7,6 +7,7 @@ use GuzzleHttp\Message\FutureResponse;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Query;
 use GuzzleHttp\Ring\Future\FutureInterface;
 
 /**
@@ -17,8 +18,6 @@ use GuzzleHttp\Ring\Future\FutureInterface;
 class Api
 {
     private $client;
-    private $email;
-    private $authKey;
 
     /**
      * This is the constructor, obviously. You should _not_ inject the Client unless you have
@@ -44,16 +43,35 @@ class Api
      *
      * @param      ApiEndpoint $endpoint
      * @param null             $data
+     * @param null             $queryParams
      * @throws SprintlyApiException
      * @return ResponseInterface
      */
-    public function get($endpoint, $data = null)
+    public function get($endpoint, $data = null, $queryParams = null)
     {
         $endpoint = $this->buildUrl($endpoint, $data);
-        $request = $this->client->createRequest('GET', $endpoint);
+        $request = $this->buildQueryParameters($this->client->createRequest('GET', $endpoint), $queryParams);
         $response = $this->execute($request);
 
         return $response;
+    }
+
+    protected function buildQueryParameters(Request $request, $data = null)
+    {
+        if(! $data) {
+            return $request;
+        }
+
+        if($data instanceof Query) {
+           $request->setQuery($data);
+            return $request;
+        }
+        $query = $request->getQuery();
+        foreach($data as $k => $v) {
+            $query->set($k, $v);
+        }
+
+        return $request;
     }
 
     /**

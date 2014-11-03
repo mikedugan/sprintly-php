@@ -3,20 +3,20 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
 
-class Item implements SprintlyItem
+class Item extends Entity implements SprintlyItem
 {
-    private $status;
-    private $product;
-    private $progress;
-    private $description;
-    private $tags;
-    private $number;
-    private $archived;
-    private $title;
-    private $createdBy;
-    private $score;
-    private $assignedTo;
-    private $type;
+    protected $status;
+    protected $product;
+    protected $progress;
+    protected $description;
+    protected $tags;
+    protected $number;
+    protected $archived;
+    protected $title;
+    protected $created_by;
+    protected $score;
+    protected $assigned_to;
+    protected $type;
 
     /**
      * @return mixed
@@ -159,7 +159,7 @@ class Item implements SprintlyItem
      */
     public function getCreatedBy()
     {
-        return $this->createdBy;
+        return $this->created_by;
     }
 
     /**
@@ -168,7 +168,7 @@ class Item implements SprintlyItem
      */
     public function setCreatedBy($createdBy)
     {
-        $this->createdBy = $createdBy;
+        $this->created_by = $createdBy;
     }
 
     /**
@@ -193,7 +193,7 @@ class Item implements SprintlyItem
      */
     public function getAssignedTo()
     {
-        return $this->assignedTo;
+        return $this->assigned_to;
     }
 
     /**
@@ -202,7 +202,7 @@ class Item implements SprintlyItem
      */
     public function setAssignedTo($assignedTo)
     {
-        $this->assignedTo = $assignedTo;
+        $this->assigned_to = $assignedTo;
     }
 
     /**

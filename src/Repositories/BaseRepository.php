@@ -2,18 +2,22 @@
 
 use Dugan\Sprintly\Api\Api;
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
+use GuzzleHttp\Message\ResponseInterface;
 
 abstract class BaseRepository
 {
     protected $model;
     protected $api;
+    protected $productId;
 
     /**
-     * @param Api $api
+     * @param Api  $api
+     * @param null $productId
      */
-    public function __construct(Api $api)
+    public function __construct(Api $api, $productId = null)
     {
         $this->api = $api instanceof Api ? $api : new Api();
+        $this->productId = $productId;
     }
 
     /**
@@ -69,5 +73,18 @@ abstract class BaseRepository
     protected function endpointVars()
     {
         return $this->make()->getEndpointVars();
+    }
+
+    protected function buildCollection(ResponseInterface $response)
+    {
+        $buf = [];
+
+        //build the array of actual objects from the response JSON
+        foreach ($response->json() as $object) {
+            $entity = $this->make();
+            $buf[] = $entity->fill($object);
+        }
+
+        return $buf;
     }
 }

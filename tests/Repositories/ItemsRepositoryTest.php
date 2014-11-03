@@ -1,4 +1,5 @@
 <?php namespace Dugan\Sprintly\Tests\Repositories;
+use Dugan\Sprintly\Api\Api;
 use Dugan\Sprintly\Repositories\ItemsRepository;
 use Dugan\Sprintly\Tests\BaseTest;
 
@@ -8,7 +9,7 @@ class ItemsRepositoryTest extends BaseTest {
     public function setUp()
     {
         parent::setUp();
-        $this->resource = new ItemsRepository();
+        $this->resource = new ItemsRepository(new Api());
     }
 
     /**
