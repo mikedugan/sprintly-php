@@ -21,7 +21,7 @@ class ProductsRepository extends BaseRepository implements Repository
     }
 
     /**
-     * Executes a
+     * Executes a POST operation to create a new product
      *
      * @param $name
      * @return mixed
@@ -41,7 +41,7 @@ class ProductsRepository extends BaseRepository implements Repository
      */
     public function delete(SprintlyProduct $product)
     {
-        $response = $this->api->delete($this->singleEndpoint(), [['product_id' => $product->id]]);
+        $response = $this->api->delete($this->singleEndpoint(), [['product_id' => $product->getId()]]);
         $entity = $this->make()->fill($response->json());
         return $entity;
     }

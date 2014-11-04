@@ -22,4 +22,10 @@ interface SprintlyPerson extends SprintlyObject
      * @return mixed
      */
     public function getEmail();
+
+    /**
+     * @return integer
+     */
+    public function getId();
 }
+
