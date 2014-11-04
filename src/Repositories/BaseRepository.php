@@ -131,7 +131,7 @@ abstract class BaseRepository
     {
         $data = [['product_id' => $this->productId]];
 
-        if(get_class($this) !== 'Dugan\Sprintly\Products\Product') {
+        if (get_class($this) !== 'Dugan\Sprintly\Products\Product') {
             $data[] = [$this->getIdPropertyName() => $id];
         }
 
@@ -176,9 +176,7 @@ abstract class BaseRepository
     public function delete(SprintlyObject $object)
     {
         $response = $this->api->delete($this->singleEndpoint(), [
-            [
                 $this->getSingleEndpointVars($object)
-            ]
         ]);
 
         return $this->make()->fill($response->json());

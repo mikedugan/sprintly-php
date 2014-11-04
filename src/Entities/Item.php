@@ -337,4 +337,9 @@ class Item extends Entity implements SprintlyItem
 
         return $buffer;
     }
+
+    public function getCreatableArray()
+    {
+        return $this->toArray();
+    }
 }
