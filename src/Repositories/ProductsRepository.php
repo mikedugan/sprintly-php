@@ -43,19 +43,7 @@ class ProductsRepository extends BaseRepository implements Repository
 
     public function invite(SprintlyPerson $person, $admin = false)
     {
-        $data = [
-            'first_name' => $person->getFirstName(),
-            'last_name' => $person->getLastName(),
-            'email' => $person->getEmail(),
-            'admin' => $admin
-        ];
 
-        $response = $this->api->post($person->getCollectionEndpoint(),
-            [['product_id' => $this->productId]],
-            $data
-            );
-
-        return (new Person())->fill($response->json());
     }
 
     /**
