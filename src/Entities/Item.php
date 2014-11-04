@@ -278,6 +278,12 @@ class Item extends Entity implements SprintlyItem
     }
 
     /**
+     * This is a "smart" method intended for use with the API.
+     *
+     * Sprintly's API does not allow you to have a title for a story, and requires
+     * the story params to be passed in separately, although we store them in the
+     * $story property.
+     *
      * @return array
      */
     public function toArray()

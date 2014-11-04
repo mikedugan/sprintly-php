@@ -1,8 +1,7 @@
 <?php  namespace Dugan\Sprintly\Repositories;
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
-use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
-use Dugan\Sprintly\Entities\Person;
+use Dugan\Sprintly\Entities\Contracts\SprintlyProduct;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 
 class ProductsRepository extends BaseRepository implements Repository
@@ -10,6 +9,8 @@ class ProductsRepository extends BaseRepository implements Repository
     protected $model = 'Dugan\Sprintly\Entities\Product';
 
     /**
+     * Returns all products accessible to the authenticated user
+     *
      * @return \GuzzleHttp\Message\ResponseInterface
      */
     public function all()
@@ -20,6 +21,8 @@ class ProductsRepository extends BaseRepository implements Repository
     }
 
     /**
+     * Executes a
+     *
      * @param $name
      * @return mixed
      */
@@ -31,12 +34,14 @@ class ProductsRepository extends BaseRepository implements Repository
     }
 
     /**
-     * @param $id
+     * Execute a DELETE operation on the product.
+     *
+     * @param SprintlyProduct $product
      * @return mixed
      */
-    public function delete($id)
+    public function delete(SprintlyProduct $product)
     {
-        $response = $this->api->delete($this->singleEndpoint(), [['product_id' => $id]]);
+        $response = $this->api->delete($this->singleEndpoint(), [['product_id' => $product->id]]);
         $entity = $this->make()->fill($response->json());
         return $entity;
     }

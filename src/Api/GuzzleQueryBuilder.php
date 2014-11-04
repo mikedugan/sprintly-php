@@ -2,20 +2,35 @@
 
 use GuzzleHttp\Query;
 
+/**
+ * This class functions as a lightweight query builder for working with the Sprintly API using guzzle.
+ *
+ * As of right now, this class has a very limited scope: any methods not explicitly defined should be called as $query->whereFoo('bar')
+ */
 class GuzzleQueryBuilder
 {
     private $query;
 
+    /**
+     * @param Query $query
+     */
     public function __construct(Query $query = null)
     {
         $this->query = $query instanceof Query ? $query : new Query();
     }
 
+    /**
+     * @return Query
+     */
     public function getQuery()
     {
         return $this->query;
     }
 
+    /**
+     * @param $offset
+     * @return $this
+     */
     public function offset($offset)
     {
         $this->query->set('offset', $offset);
@@ -23,6 +38,14 @@ class GuzzleQueryBuilder
         return $this;
     }
 
+    /**
+     * Checks and parses a method, and assigns query parameters based on that
+     *
+     * @param $method
+     * @param $args
+     * @throws \Exception
+     * @return $this
+     */
     public function __call($method, $args)
     {
         $this->checkMethodName($method);
@@ -32,6 +55,12 @@ class GuzzleQueryBuilder
         return $this;
     }
 
+    /**
+     * Parses a method name into a query string
+     *
+     * @param $method
+     * @return string
+     */
     private function parseMethodName($method)
     {
         $method = explode('where', $method)[1];
@@ -41,6 +70,13 @@ class GuzzleQueryBuilder
         return $method;
     }
 
+    /**
+     * Ensures the method name is valid
+     *
+     * @param $method
+     * @throws \Exception
+     * @return void
+     */
     private function checkMethodName($method)
     {
         if(strpos($method, 'where') !== 0) {

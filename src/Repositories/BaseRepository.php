@@ -20,6 +20,12 @@ abstract class BaseRepository
         $this->productId = $productId;
     }
 
+    /**
+     * Handles the logic for retrieving one or many of a resource
+     *
+     * @param null $ids
+     * @return array
+     */
     public function get($ids = null)
     {
         //if we have an array, we want to build the collection of resources
@@ -53,6 +59,8 @@ abstract class BaseRepository
     }
 
     /**
+     * Instantiates the repository's target class
+     *
      * @return SprintlyObject
      */
     protected function make()
@@ -90,6 +98,12 @@ abstract class BaseRepository
         return $this->make()->getEndpointVars();
     }
 
+    /**
+     * Accepts a Guzzle response and converts it to a collection of SprintlyObjects
+     *
+     * @param ResponseInterface $response
+     * @return array
+     */
     protected function buildCollection(ResponseInterface $response)
     {
         $buf = [];

@@ -12,18 +12,27 @@ class ItemsRepository extends BaseRepository implements Repository
     protected $query;
 
     /**
+     * Executes a GET operation to retrieve all items belonging to a product
+     *
      * @return array
      */
     public function all()
     {
         $response = $this->api->get($this->collectionEndpoint(),
             [['product_id' => $this->productId]],
-            ['status' => 'someday', 'backlog', 'in-progress', 'completed']
+            //Sprintly's API requires us to pass in a string of statuses - we want them all!
+            ['status' => 'someday,backlog,in-progress,completed']
         );
 
         return $this->buildCollection($response);
     }
 
+    /**
+     * Executes a POST operation to create a new item on the product
+     *
+     * @param SprintlyItem $item
+     * @return SprintlyObject
+     */
     public function create(SprintlyItem $item)
     {
         $data = $item->toArray();

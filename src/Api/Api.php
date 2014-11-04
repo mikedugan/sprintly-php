@@ -53,16 +53,27 @@ class Api
         return $response;
     }
 
+    /**
+     * Accepts and modifies a Request, building in the query parameters
+     *
+     * @param Request $request
+     * @param null    $data
+     * @return Request
+     */
     protected function buildQueryParameters(Request $request, $data = null)
     {
+        //Just in case no URL data was passed in
         if(! $data) {
             return $request;
         }
 
+        //If a Query object was passed in, we'll go ahead and set that on the request
         if($data instanceof Query) {
            $request->setQuery($data);
             return $request;
         }
+
+        //get the query object and iterate over it, assigning the data values
         $query = $request->getQuery();
         foreach($data as $k => $v) {
             $query->set($k, $v);
@@ -140,6 +151,8 @@ class Api
     /**
      * A very compact template engine for populating placeholders in API endpoints
      *
+     * The array of $objects should contain either key-value pairs or SprintlyObjects
+     *
      * @param ApiEndpoint $endpoint
      * @param array       $objects
      * @return string
@@ -151,6 +164,8 @@ class Api
             return 'https://sprint.ly' . $endpoint->endpoint();
         }
 
+        //iterates over each object and parses the parameters from it
+        //note that an object can be a SprintlyObject|array
         foreach ($objects as $object) {
             $this->parseParameters($endpoint, $object);
         }
@@ -165,6 +180,7 @@ class Api
      */
     private function parseParameters(ApiEndpoint $endpoint, $object)
     {
+        //If a SprintlyObject was passed it, let's assign the endpoint vars to the $object
         if ($object instanceof SprintlyObject) {
             $object = $object->getEndpointVars();
         }

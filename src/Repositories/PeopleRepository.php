@@ -8,6 +8,8 @@ class PeopleRepository extends BaseRepository implements Repository
     protected $model = 'Dugan\Sprintly\Entities\Person';
 
     /**
+     * Executes a GET operation to retrieve all users assigned to a product
+     *
      * @return array
      */
     public function all()
@@ -19,6 +21,13 @@ class PeopleRepository extends BaseRepository implements Repository
         return $this->buildCollection($response);
     }
 
+    /**
+     * Executes a POST operation to invite a user to a product
+     *
+     * @param SprintlyPerson $person
+     * @param bool           $admin
+     * @return SprintlyPerson
+     */
     public function invite(SprintlyPerson $person, $admin = false)
     {
         $data = [
@@ -36,6 +45,14 @@ class PeopleRepository extends BaseRepository implements Repository
         return $this->make()->fill($response->json());
     }
 
+    /**
+     * Executes a DELETE operation to remove the user from the product.
+     *
+     * Note this does not actually delete the user, but only removes them from the product
+     *
+     * @param SprintlyPerson $person
+     * @return SprintlyPerson
+     */
     public function delete(SprintlyPerson $person)
     {
         $response = $this->api->delete($this->singleEndpoint(), [[
