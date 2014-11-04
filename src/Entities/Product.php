@@ -56,6 +56,15 @@ class Product extends Entity implements SprintlyProduct
     }
 
     /**
+     * @param $id
+     * @return void
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return bool
      */
     public function getAdmin()

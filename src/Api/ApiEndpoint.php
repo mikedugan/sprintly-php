@@ -36,16 +36,6 @@ class ApiEndpoint
     /**
      * @param $method
      * @param $args
-     * @return string
-     */
-    public function __call($method, $args)
-    {
-        return self::$method;
-    }
-
-    /**
-     * @param $method
-     * @param $args
      * @return ApiEndpoint
      */
     public static function __callStatic($method, $args)

@@ -85,7 +85,7 @@ class ItemsRepository extends BaseRepository implements Repository
      */
     public function children(SprintlyItem $item)
     {
-        if (! $item->getType() === 'story') {
+        if ($item->getType() !== 'story') {
             return false;
         }
 
