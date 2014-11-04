@@ -19,6 +19,10 @@ class Item extends Entity implements SprintlyItem
     protected $score;
     protected $assigned_to;
     protected $type;
+    //These are the fields that the Sprintly API will allow us to update
+    protected $updatable = ['title','description','score','status','assigned_to','tags','parent'];
+    //These are the fields that can be updated on a story
+    protected $storyUpdatable = ['what','why','who'];
 
     /**
      * @return mixed
@@ -312,17 +316,21 @@ class Item extends Entity implements SprintlyItem
         return $props;
     }
 
+
+    /**
+     * Converts the object into a key-val array that can be used to update Sprintly API
+     *
+     * @return array
+     */
     public function getUpdateArray()
     {
-        $updatable = ['title','description','score','status','assigned_to','tags','parent'];
-        $storyUpdatable = ['what','why','who'];
         $buffer = [];
-        foreach($updatable as $key) {
+        foreach($this->updatable as $key) {
            $buffer[$key] = $this->{$key};
         }
 
         if($this->getType() === 'story') {
-            foreach($storyUpdatable as $key) {
+            foreach($this->storyUpdatable as $key) {
                 $buffer[$key] = $this->{$key};
             }
         }

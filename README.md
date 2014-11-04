@@ -132,15 +132,35 @@ before returning them back to you.
 
 In the Sprintly verbiage, users are called people and person. The API wrapper reflects this. You can only retrieve people in the context of a product.
 
-To add a user to a product:
+To invite a user to a product:
+
+```
+$user = new \Dugan\Sprintly\Entities\Person();
+$user->setFirstName('Mike');
+$user->setLastName('Dugan');
+$user->setEmail('foo@bar.com');
+$invitedUser = $service->people()->invite($user);
+```
 
 ### Items
 
 Items are the stories, tasks, defects, etc that belong to a product. Again, these can only be retrieved in the context of a product.
 
 To create a new item:
+```
+$item = new \Dugan\Sprintly\Entities\Item();
+$item->setTitle('Something broke');
+$item->setAssignedTo($myUserId);
+$item->setTags('major,bug');
+$service->items()->create($item);
+```
 
 To retrieve an item's children:
+
+```
+$item = $service->items()->get($itemId);
+$children = $service->items()->children($item);
+```
 
 #### Annotations
 

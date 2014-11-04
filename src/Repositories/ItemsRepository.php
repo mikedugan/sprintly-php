@@ -45,6 +45,12 @@ class ItemsRepository extends BaseRepository implements Repository
         return $this->make()->fill($response->json());
     }
 
+    /**
+     * Executes a POST operation to update an existing item
+     *
+     * @param SprintlyItem $item
+     * @return SprintlyItem
+     */
     public function update(SprintlyItem $item)
     {
         $data = $item->getUpdateArray();
@@ -105,12 +111,26 @@ class ItemsRepository extends BaseRepository implements Repository
         return $user;
     }
 
+    /**
+     * Creates a new query builder and returns the repository
+     *
+     * This should be the first method called in a query builder chain
+     *
+     * @return ItemsRepository
+     */
     public function query()
     {
         $this->query = new GuzzleQueryBuilder();
         return $this;
     }
 
+    /**
+     * Executes the GET operating using the query parameters from the query builder
+     *
+     * This should be the final method called in the query builder chain
+     *
+     * @return array
+     */
     public function retrieve()
     {
         $response = $this->api->get($this->collectionEndpoint(),
@@ -121,6 +141,16 @@ class ItemsRepository extends BaseRepository implements Repository
         return $this->buildCollection($response);
     }
 
+    /**
+     * Magic method that is used for chaining with the query builder
+     *
+     * Usage: $itemsRepo->query()->whereTitle('I broke something')->retrieve()
+     * The whereTitle is the call to this method.
+     *
+     * @param $method
+     * @param $args
+     * @return ItemsRepository
+     */
     public function __call($method, $args)
     {
         $this->query->{$method}($args[0]);
