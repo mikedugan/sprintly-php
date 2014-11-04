@@ -45,6 +45,17 @@ class ItemsRepository extends BaseRepository implements Repository
         return $this->make()->fill($response->json());
     }
 
+    public function update(SprintlyItem $item)
+    {
+        $data = $item->getUpdateArray();
+        $response = $this->api->post($this->singleEndpoint(),
+            [['product_id' => $this->productId, 'item_number' => $item->getNumber()]],
+            $data
+        );
+
+        return $this->make()->fill($response->json());
+    }
+
     /**
      * Executes a DELETE operation to archive the item
      *
@@ -88,7 +99,7 @@ class ItemsRepository extends BaseRepository implements Repository
     protected function retrieveSingle($itemId)
     {
         $response = $this->api->get($this->singleEndpoint(),
-            [['product_id' => $this->productId], ['item_id' => $itemId]]);
+            [['product_id' => $this->productId], ['item_number' => $itemId]]);
         //converts the returned JSON to the appropriate entity
         $user = $this->make()->fill($response->json());
         return $user;

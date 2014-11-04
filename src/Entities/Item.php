@@ -6,6 +6,7 @@ use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
 class Item extends Entity implements SprintlyItem
 {
     protected $status;
+    protected $parent;
     protected $product;
     protected $progress;
     protected $story;
@@ -34,6 +35,16 @@ class Item extends Entity implements SprintlyItem
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
     }
 
     /**
@@ -289,6 +300,7 @@ class Item extends Entity implements SprintlyItem
     public function toArray()
     {
         $props = get_object_vars($this);
+        unset($props['number']);
         if(isset($props['story'])) {
             unset($props['title']);
             unset($props['story']);
@@ -298,5 +310,23 @@ class Item extends Entity implements SprintlyItem
         }
 
         return $props;
+    }
+
+    public function getUpdateArray()
+    {
+        $updatable = ['title','description','score','status','assigned_to','tags','parent'];
+        $storyUpdatable = ['what','why','who'];
+        $buffer = [];
+        foreach($updatable as $key) {
+           $buffer[$key] = $this->{$key};
+        }
+
+        if($this->getType() === 'story') {
+            foreach($storyUpdatable as $key) {
+                $buffer[$key] = $this->{$key};
+            }
+        }
+
+        return $buffer;
     }
 }

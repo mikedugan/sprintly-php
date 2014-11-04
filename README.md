@@ -7,23 +7,19 @@ This is a library that wraps the Sprint.ly API for PHP 5.4+.
 
 API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
 
-"CRUD" should be interpreted as: Create resource, delete resource, retrieve all of resource, retrieve 1+ resource, update resource
+"CRUD" should be interpreted as: 
 
-:heavy_check_mark: Product CRUD (Update: :interrobang:)
+*Create resource, delete resource, retrieve all of resource, retrieve 1+ resource, update resource*
+
+:heavy_check_mark: Product CRUD 
 
 :heavy_check_mark: Product People CRUD
 
-:heavy_check_mark: Retrieve a product's items
+:heavy_check_mark: Product Item CRUD
 
 :heavy_check_mark: Perform lightweight queries of a product's items
 
-:heavy_check_mark: Retrieve a single item from a product
-
-:heavy_check_mark: Add item to product
-
-:x: Delete item from product
-
-:x: Retrieve children of an item
+:heavy_check_mark: Retrieve children of an item
 
 ## Quickstart
 

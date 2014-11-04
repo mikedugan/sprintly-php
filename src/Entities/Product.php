@@ -101,4 +101,15 @@ class Product extends Entity implements SprintlyProduct
     {
         return get_object_vars($this);
     }
+
+    public function getUpdateArray()
+    {
+        $updatabale = ['name','archived'];
+        $buffer = [];
+        foreach($updatabale as $key) {
+            $buffer[$key] = $this->{$key};
+        }
+
+        return $buffer;
+    }
 }

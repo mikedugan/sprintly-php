@@ -33,6 +33,13 @@ class ProductsRepository extends BaseRepository implements Repository
         return $entity;
     }
 
+    public function update(SprintlyProduct $product)
+    {
+        $data = $product->getUpdateArray();
+        $response = $this->api->post($this->singleEndpoint(), [['product_id' => $product->getId()]], $data);
+        return $this->make()->fill($response->json());
+    }
+
     /**
      * Execute a DELETE operation on the product.
      *
