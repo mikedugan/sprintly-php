@@ -1,5 +1,6 @@
 <?php  namespace Dugan\Sprintly\Repositories;
 
+use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Api\GuzzleQueryBuilder;
 use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
@@ -42,6 +43,40 @@ class ItemsRepository extends BaseRepository implements Repository
         );
 
         return $this->make()->fill($response->json());
+    }
+
+    /**
+     * Executes a DELETE operation to archive the item
+     *
+     * @param SprintlyItem $item
+     * @return SprintlyItem
+     */
+    public function delete(SprintlyItem $item)
+    {
+        $response = $this->api->delete($this->singleEndpoint(),
+            [['product_id' => $this->productId, 'item_number' => $item->getNumber()]]
+        );
+
+        return $this->make()->fill($response->json());
+    }
+
+    /**
+     * Executes a GET operation to retrieve children of a story item
+     *
+     * @param SprintlyItem $item
+     * @return array|bool
+     */
+    public function children(SprintlyItem $item)
+    {
+        if (! $item->getType() === 'story') {
+            return false;
+        }
+
+        $response = $this->api->get(ApiEndpoint::PRODUCT_ITEM_CHILDREN(),
+            [['product_id' => $this->productId, 'item_number' => $item->getNumber()]]
+        );
+
+        return $this->buildCollection($response);
     }
 
     /**
