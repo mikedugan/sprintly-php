@@ -41,11 +41,6 @@ class ProductsRepository extends BaseRepository implements Repository
         return $entity;
     }
 
-    public function invite(SprintlyPerson $person, $admin = false)
-    {
-
-    }
-
     /**
      * Execute a GET operation and convert the result to an object
      *

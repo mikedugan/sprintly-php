@@ -17,4 +17,9 @@ abstract class Entity
         }
         return $this;
     }
+
+    public function toArray()
+    {
+        return get_object_vars($this);
+    }
 }

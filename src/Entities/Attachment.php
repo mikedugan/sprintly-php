@@ -3,7 +3,7 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyAttachment;
 
-class Attachment implements SprintlyAttachment
+class Attachment extends Entity implements SprintlyAttachment
 {
     private $createdAt;
     private $createdBy;

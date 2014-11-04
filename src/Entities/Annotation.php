@@ -3,7 +3,7 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyAnnotation;
 
-class Annotation implements SprintlyAnnotation
+class Annotation extends Entity implements SprintlyAnnotation
 {
     private $action;
     private $body;

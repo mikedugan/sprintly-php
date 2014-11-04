@@ -3,7 +3,7 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyComment;
 
-class Comment implements SprintlyComment
+class Comment extends Entity implements SprintlyComment
 {
     private $body;
     private $type;

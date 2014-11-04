@@ -3,7 +3,7 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyTag;
 
-class Tag implements SprintlyTag
+class Tag extends Entity implements SprintlyTag
 {
     private $id;
     private $tag;
