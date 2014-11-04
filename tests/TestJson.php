@@ -144,4 +144,36 @@ class TestJson
         "type": "task"
         }';
     }
+
+    public static function allPeopleJson()
+    {
+       return '[
+        {
+            "admin": true,
+            "first_name": "Mike",
+            "last_name": "Dugan",
+            "id": 1,
+            "email": "foo@bar.com"
+        },
+        {
+            "admin": true,
+            "first_name": "Joe",
+            "last_name": "Stump",
+            "id": 1,
+            "email": "joe@joestump.net"
+        }
+        ]';
+    }
+
+    public static function singlePersonJson()
+    {
+        return '{
+            "admin": true,
+            "first_name": "Joe",
+            "last_name": "Stump",
+            "id": 1,
+            "email": "joe@joestump.net"
+        }';
+    }
 }
+

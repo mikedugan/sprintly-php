@@ -22,4 +22,15 @@ abstract class Entity
     {
         return get_object_vars($this);
     }
+
+    public function getCreatableArray()
+    {
+        $props = get_object_vars($this);
+        unset($props['id']);
+    }
+
+    public function getUpdatableArray()
+    {
+       return $this->toArray();
+    }
 }

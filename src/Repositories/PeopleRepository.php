@@ -1,25 +1,13 @@
 <?php  namespace Dugan\Sprintly\Repositories;
 
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 
 class PeopleRepository extends BaseRepository implements Repository
 {
     protected $model = 'Dugan\Sprintly\Entities\Person';
-
-    /**
-     * Executes a GET operation to retrieve all users assigned to a product
-     *
-     * @return array
-     */
-    public function all()
-    {
-        $response = $this->api->get($this->collectionEndpoint(),
-            [['product_id' => $this->productId]]
-        );
-
-        return $this->buildCollection($response);
-    }
+    protected $primaryId = 'user_id';
 
     /**
      * Executes a POST operation to invite a user to a product
@@ -46,34 +34,22 @@ class PeopleRepository extends BaseRepository implements Repository
     }
 
     /**
-     * Executes a DELETE operation to remove the user from the product.
-     *
-     * Note this does not actually delete the user, but only removes them from the product
-     *
-     * @param SprintlyPerson $person
-     * @return SprintlyPerson
+     * @param SprintlyObject $object
+     * @return array
      */
-    public function delete(SprintlyPerson $person)
+    protected function getSingleEndpointVars(SprintlyObject $object)
     {
-        $response = $this->api->delete($this->singleEndpoint(), [[
-            'product_id' => $this->productId,
-            'user_id' => $person->getId()
-        ]]);
-
-        return $this->make()->fill($response->json());
+        return ['product_id' => $this->productId,
+            'user_id' => $object->getId()];
     }
 
     /**
-     * Executes a GET operation for a single resource
-     *
-     * @param $personId
-     * @return mixed
+     * @return string
      */
-    public function retrieveSingle($personId)
+    protected function getIdPropertyName()
     {
-        $response = $this->api->get($this->singleEndpoint(), [['product_id' => $this->productId], ['user_id' => $personId]]);
-        //converts the returned JSON to the appropriate entity
-        $user = $this->make()->fill($response->json());
-        return $user;
+        return $this->primaryId;
     }
+
+
 }

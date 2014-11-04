@@ -21,27 +21,6 @@ abstract class BaseRepository
     }
 
     /**
-     * Handles the logic for retrieving one or many of a resource
-     *
-     * @param null $ids
-     * @return array
-     */
-    public function get($ids = null)
-    {
-        //if we have an array, we want to build the collection of resources
-        if (is_array($ids)) {
-            $buf = [];
-            foreach ($ids as $id) {
-                $buf[] = $this->retrieveSingle($id);
-            }
-
-            return $buf;
-        }
-
-        return $this->retrieveSingle($ids);
-    }
-
-    /**
      * @return mixed
      */
     public function getModel()
@@ -99,6 +78,113 @@ abstract class BaseRepository
     }
 
     /**
+     * @return array
+     */
+    public function all()
+    {
+        $response = $this->api->get($this->collectionEndpoint(),
+            [$this->getCollectionEndpointVars()]
+        );
+
+        return $this->buildCollection($response);
+    }
+
+    /**
+     * Handles the logic for retrieving one or many of a resource
+     *
+     * @param null $ids
+     * @return array
+     */
+    public function get($ids = null)
+    {
+        //if we have an array, we want to build the collection of resources
+        if (is_array($ids)) {
+            $buf = [];
+            foreach ($ids as $id) {
+                $buf[] = $this->retrieveSingle($id);
+            }
+
+            return $buf;
+        }
+
+        return $this->retrieveSingle($ids);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    protected function retrieveSingle($id)
+    {
+        $data = $this->getUrlDataForSingle($id);
+        $response = $this->api->get($this->singleEndpoint(), $data);
+        //converts the returned JSON to the appropriate entity
+        $object = $this->make()->fill($response->json());
+        return $object;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    protected function getUrlDataForSingle($id)
+    {
+        $data = [['product_id' => $this->productId]];
+
+        if(get_class($this) !== 'Dugan\Sprintly\Products\Product') {
+            $data[] = [$this->getIdPropertyName() => $id];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param SprintlyObject $object
+     * @return mixed
+     */
+    public function create(SprintlyObject $object)
+    {
+        $data = $object->getCreatableArray();
+        $response = $this->api->post($this->collectionEndpoint(),
+            [$this->getCollectionEndpointVars()],
+            $data
+        );
+
+        return $this->make()->fill($response->json());
+    }
+
+    /**
+     * @param SprintlyObject $object
+     * @return mixed
+     */
+    public function update(SprintlyObject $object)
+    {
+        $data = $object->getUpdateArray();
+        $response = $this->api->post($this->singleEndpoint(),
+            [$this->getSingleEndpointVars($object)],
+            $data
+        );
+
+        return $this->make()->fill($response->json());
+    }
+
+
+    /**
+     * @param SprintlyObject $object
+     * @return mixed
+     */
+    public function delete(SprintlyObject $object)
+    {
+        $response = $this->api->delete($this->singleEndpoint(), [
+            [
+                $this->getSingleEndpointVars($object)
+            ]
+        ]);
+
+        return $this->make()->fill($response->json());
+    }
+
+    /**
      * Accepts a Guzzle response and converts it to a collection of SprintlyObjects
      *
      * @param ResponseInterface $response
@@ -116,4 +202,23 @@ abstract class BaseRepository
 
         return $buf;
     }
+
+    /**
+     * @return array
+     */
+    protected function getCollectionEndpointVars()
+    {
+        return ['product_id' => $this->productId];
+    }
+
+    /**
+     * @param SprintlyObject $object
+     * @return mixed
+     */
+    abstract protected function getSingleEndpointVars(SprintlyObject $object);
+
+    /**
+     * @return mixed
+     */
+    abstract protected function getIdPropertyName();
 }

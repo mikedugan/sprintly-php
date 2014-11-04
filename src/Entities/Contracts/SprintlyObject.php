@@ -23,4 +23,8 @@ interface SprintlyObject
      * @return array
      */
     public function toArray();
+
+    public function getUpdatableArray();
+
+    public function getCreatableArray();
 }

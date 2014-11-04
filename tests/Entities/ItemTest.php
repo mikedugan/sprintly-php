@@ -29,4 +29,20 @@ class ItemTest extends BaseTest {
         $this->hasCollectionEndpoint($this->resource);
         $this->assertTrue(is_array($this->resource->getEndpointVars()));
     }
+
+    /**
+    * @test
+    */
+    public function setsAndGetsProperties()
+    {
+        $props = ['status', 'parent', 'product', 'progress',
+        'description', 'tags', 'number', 'archived', 'title', 'createdBy', 'score', 'assignedTo'];
+
+        foreach($props as $prop) {
+            $prop = ucfirst($prop);
+            $this->assertNull($this->resource->{'get'.$prop}());
+            $this->assertNull($this->resource->{'set'.$prop}(5));
+            $this->assertEquals(5, $this->resource->{'get'.$prop}());
+        }
+    }
 }

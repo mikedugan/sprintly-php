@@ -127,4 +127,9 @@ class Product extends Entity implements SprintlyProduct
 
         return $buffer;
     }
+
+    public function getCreatableArray()
+    {
+        return ['name' => $this->name];
+    }
 }

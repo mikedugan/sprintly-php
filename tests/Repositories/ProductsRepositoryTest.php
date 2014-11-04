@@ -4,7 +4,6 @@ use Dugan\Sprintly\Api\Api;
 use Dugan\Sprintly\Repositories\ProductsRepository;
 use Dugan\Sprintly\Tests\BaseTest;
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
 
 class ProductsRepositoryTest extends BaseTest
 {
@@ -74,9 +73,7 @@ class ProductsRepositoryTest extends BaseTest
         $response->shouldReceive('json')
                  ->andReturn(json_decode($this->getAllProductsResponse(), 1));
         $client = \Mockery::mock('Dugan\Sprintly\Api\Api');
-        $client->shouldReceive('get')
-               ->with('Dugan\Sprintly\Api\ApiEndpoint')
-               ->andReturn($response);
+        $client->shouldReceive('get')->andReturn($response);
         $this->resource = new ProductsRepository($client);
         $products = $this->resource->all();
         $this->assertCount(2, $products);

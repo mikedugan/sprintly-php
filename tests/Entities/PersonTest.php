@@ -29,4 +29,24 @@ class PersonTest extends BaseTest {
         $this->hasCollectionEndpoint($this->resource);
         $this->assertTrue(is_array($this->resource->getEndpointVars()));
     }
+
+    /**
+    * @test
+    */
+    public function setsAndGetsAdmin()
+    {
+        $this->assertNull($this->resource->getAdmin());
+        $this->assertNull($this->resource->setAdmin(true));
+        $this->assertTrue($this->resource->getAdmin());
+    }
+
+    /**
+    * @test
+    */
+    public function setsAndGetsId()
+    {
+        $this->assertNull($this->resource->getId());
+        $this->assertNull($this->resource->setId(1));
+        $this->assertEquals(1, $this->resource->getId());
+    }
 }
