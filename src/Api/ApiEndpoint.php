@@ -70,4 +70,59 @@ class ApiEndpoint
     {
         $this->endpoint = str_replace('{' . $varKey . '}', $varValue, $this->endpoint);
     }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    public function getUrl($data)
+    {
+        return $this->buildUrl($data);
+    }
+
+    /**
+     * @param array $objects
+     * @return string
+     */
+    public function buildUrl(array $objects = null)
+    {
+        //We're using a raw endpoint such as /api/products.json
+        if (! $objects) {
+            return 'https://sprint.ly' . $this->endpoint;
+        }
+
+        //iterates over each object and parses the parameters from it
+        //note that an object can be a SprintlyObject|array
+        foreach ($objects as $object) {
+            $this->parseParameters($object);
+        }
+
+        return 'https://sprint.ly' . $this->endpoint;
+    }
+
+    /**
+     * @param $object
+     * @return void
+     */
+    protected function parseParameters($object)
+    {
+        //If a SprintlyObject was passed it, let's assign the endpoint vars to the $object
+        if ($object instanceof SprintlyObject) {
+            $object = $object->getEndpointVars();
+        }
+
+        $this->assignValues($object);
+    }
+
+    /**
+     * @param             $object
+     * @return void
+     */
+    private function assignValues($object)
+    {
+        foreach ($object as $key => $value) {
+            //the endpoint has a self-modifying method to replace the placeholder
+            $this->replace($key, $value);
+        }
+    }
 }

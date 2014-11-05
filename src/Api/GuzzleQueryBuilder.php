@@ -19,6 +19,38 @@ class GuzzleQueryBuilder
         $this->query = $query instanceof Query ? $query : new Query();
     }
 
+
+    /**
+     * Factory method to build a new query object given an array of params
+     *
+     * @static
+     * @param $data
+     * @return Query
+     */
+    public static function fromQueryParams($data)
+    {
+        return (new self)->build($data);
+    }
+
+    /**
+     * Builds a query given an array of parameters
+     *
+     * @param $data
+     * @return Query
+     */
+    public function build($data = null)
+    {
+        if (empty($data) || $data instanceof Query) {
+            return $data;
+        }
+
+        foreach ($data as $k => $v) {
+            $this->query->set($k, $v);
+        }
+
+        return $this->query;
+    }
+
     /**
      * @return Query
      */
@@ -79,7 +111,7 @@ class GuzzleQueryBuilder
      */
     private function checkMethodName($method)
     {
-        if(strpos($method, 'where') !== 0) {
+        if (strpos($method, 'where') !== 0) {
             throw new \Exception("Method {$method} does not exist", 500);
         }
     }

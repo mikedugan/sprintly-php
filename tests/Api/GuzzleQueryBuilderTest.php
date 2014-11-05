@@ -2,6 +2,7 @@
 
 use Dugan\Sprintly\Api\GuzzleQueryBuilder;
 use Dugan\Sprintly\Tests\BaseTest;
+use GuzzleHttp\Query;
 
 class GuzzleQueryBuilderTest extends BaseTest
 {
@@ -49,6 +50,42 @@ class GuzzleQueryBuilderTest extends BaseTest
         $query = $this->resource->whereCreatedBy(123)->getQuery();
         $this->assertArrayHasKey('created_by', $query);
         $this->assertEquals(123, $query['created_by']);
+    }
+
+    /**
+    * @test
+    */
+    public function buildsGetParameters()
+    {
+        $query = $this->resource->build(['foo' => 'bar']);
+        $this->assertInstanceOf('GuzzleHttp\Query', $query);
+        $this->assertEquals('bar', $query['foo']);
+    }
+
+    /**
+    * @test
+    */
+    public function returnsDataIfNullOrQuery()
+    {
+        $query = new Query();
+        $query->set('foo', 'bar');
+        $updated = $this->resource->build($query);
+        $this->assertInstanceOf('GuzzleHttp\Query', $updated);
+        $this->assertEquals('bar', $updated['foo']);
+        $updated = $this->resource->build([]);
+        $this->assertTrue(empty($updated));
+        $updated = $this->resource->build();
+        $this->assertTrue(empty($updated));
+    }
+
+    /**
+    * @test
+    */
+    public function factoryMethodBuildsGetParameters()
+    {
+        $query = GuzzleQueryBuilder::fromQueryParams(['foo' => 'bar']);
+        $this->assertInstanceOf('GuzzleHttp\Query', $query);
+        $this->assertEquals('bar', $query['foo']);
     }
 
     /**
