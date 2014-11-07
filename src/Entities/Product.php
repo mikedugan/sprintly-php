@@ -87,7 +87,7 @@ class Product extends Entity implements SprintlyProduct
      */
     public function getWebhook()
     {
-        return $this->webhoook;
+        return $this->webhook;
     }
 
     /**
