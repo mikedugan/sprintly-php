@@ -12,6 +12,7 @@ class Product extends Entity implements SprintlyProduct
     protected $created_at = '';
     //These are the fields that Sprintly will allow us to update
     protected $updatabale = ['name','archived'];
+    protected $webhook;
 
     /**
      * @return string
@@ -79,6 +80,14 @@ class Product extends Entity implements SprintlyProduct
     public function setAdmin($admin)
     {
         $this->admin = $admin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWebhook()
+    {
+        return $this->webhoook;
     }
 
     /**
