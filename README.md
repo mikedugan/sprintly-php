@@ -118,6 +118,18 @@ Retrieve a collection of products (but not all of them!):
 
 Returns an array of `\Dugan\Sprintly\Entities\Product`
 
+The returned product will have several properties on it which are available for your use:
+
+```
+$product->getName();
+$product->getCreatedBy();
+$product->getId();
+$product->getCreatedAt();
+$product->getWebhook();
+```
+
+The webhook is especially useful if you want to integrate Sprintly with GitHub or Bitbucket for closing items via commit messages.
+
 ### The Product ID
 
 Most of the entities represented by the Sprintly API are only accessible in the context of a product.
