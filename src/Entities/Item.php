@@ -20,7 +20,7 @@ class Item extends Entity implements SprintlyItem
     protected $assigned_to;
     protected $type;
     //These are the fields that the Sprintly API will allow us to update
-    protected $updatable = ['title','description','score','status','assigned_to','tags','parent'];
+    protected $updatable = ['type','title','description','score','status','assigned_to','tags','parent'];
     //These are the fields that can be updated on a story
     protected $storyUpdatable = ['what','why','who'];
 
@@ -304,6 +304,11 @@ class Item extends Entity implements SprintlyItem
     public function toArray()
     {
         $props = get_object_vars($this);
+        foreach($props as $k => $v) {
+            if(! in_array($k, $this->updatable)) {
+                unset($props[$k]);
+            }
+        }
         unset($props['number']);
         if(isset($props['story'])) {
             unset($props['title']);
