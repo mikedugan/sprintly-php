@@ -45,7 +45,9 @@ class Api
     public function get(ApiEndpoint $endpoint, $data = null, $queryParams = null)
     {
         $request = $this->client->createRequest('GET', $endpoint->getUrl($data));
-        $request->setQuery(GuzzleQueryBuilder::fromQueryParams($queryParams));
+        if($queryParams) {
+            $request->setQuery(GuzzleQueryBuilder::fromQueryParams($queryParams));
+        }
         $response = $this->execute($request);
 
         return $response;
