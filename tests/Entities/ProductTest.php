@@ -29,4 +29,37 @@ class ProductTest extends BaseTest {
         $this->hasCollectionEndpoint($this->resource);
         $this->assertTrue(is_array($this->resource->getEndpointVars()));
     }
+
+    /**
+    * @test
+    */
+    public function convertsToArray()
+    {
+        $array = $this->resource->toArray();
+        $this->assertArrayHasKey('id', $array);
+        $this->assertArrayHasKey('name', $array);
+        $this->assertArrayHasKey('archived', $array);
+        $this->assertArrayHasKey('admin', $array);
+        $this->assertArrayHasKey('created_at', $array);
+        $this->assertArrayHasKey('webhook', $array);
+    }
+
+    /**
+    * @test
+    */
+    public function convertsToCreatableArray()
+    {
+        $array = $this->resource->getCreatableArray();
+        $this->assertArrayHasKey('name', $array);
+    }
+
+    /**
+    * @test
+    */
+    public function convertsToUpdatableArray()
+    {
+        $array = $this->resource->getUpdatableArray();
+        $this->assertArrayHasKey('name', $array);
+        $this->assertArrayHasKey('archived', $array);
+    }
 }

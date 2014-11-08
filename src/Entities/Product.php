@@ -12,7 +12,7 @@ class Product extends Entity implements SprintlyProduct
     protected $admin;
     protected $created_at;
     //These are the fields that Sprintly will allow us to update
-    protected $updatabale = ['name','archived'];
+    protected $updatable = ['name','archived'];
     protected $webhook;
 
     /**
@@ -132,7 +132,9 @@ class Product extends Entity implements SprintlyProduct
      */
     public function toArray()
     {
-        return get_object_vars($this);
+        $array = get_object_vars($this);
+        unset($array['updatable']);
+        return $array;
     }
 
     /**
@@ -143,7 +145,7 @@ class Product extends Entity implements SprintlyProduct
     public function getUpdateArray()
     {
         $buffer = [];
-        foreach($this->updatabale as $key) {
+        foreach($this->updatable as $key) {
             $buffer[$key] = $this->{$key};
         }
 
