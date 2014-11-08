@@ -35,8 +35,8 @@ class ItemTest extends BaseTest {
     */
     public function setsAndGetsProperties()
     {
-        $props = ['status', 'parent', 'product', 'progress',
-        'description', 'tags', 'number', 'archived', 'title', 'createdBy', 'score', 'assignedTo'];
+        $props = ['status', 'parent', 'progress', 'description', 'tags',
+            'number', 'archived', 'title', 'createdBy', 'score', 'assignedTo'];
 
         foreach($props as $prop) {
             $prop = ucfirst($prop);
@@ -44,5 +44,35 @@ class ItemTest extends BaseTest {
             $this->assertNull($this->resource->{'set'.$prop}(5));
             $this->assertEquals(5, $this->resource->{'get'.$prop}());
         }
+    }
+
+    /**
+    * @test
+    */
+    public function convertsToArray()
+    {
+        $array = $this->resource->toArray();
+        $this->assertArrayHasKey('story', $array);
+        $this->assertArrayNotHasKey('who', $array);
+    }
+
+    /**
+    * @test
+    */
+    public function convertsToUpdatableArray()
+    {
+        $array = $this->resource->getUpdateArray();
+        $this->assertArrayHasKey('title', $array);
+        $this->assertArrayNotHasKey('who', $array);
+    }
+
+    /**
+    * @test
+    */
+    public function convertsToCreatableArray()
+    {
+        $array = $this->resource->getCreatableArray();
+        $this->assertArrayHasKey('story', $array);
+        $this->assertArrayNotHasKey('who', $array);
     }
 }

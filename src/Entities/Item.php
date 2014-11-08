@@ -2,6 +2,7 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
+use Dugan\Sprintly\SprintlyService;
 
 class Item extends Entity implements SprintlyItem
 {
@@ -49,23 +50,6 @@ class Item extends Entity implements SprintlyItem
     public function setParent($parent)
     {
         $this->parent = $parent;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param $product
-     * @return void
-     */
-    public function setProduct($product)
-    {
-        $this->product = $product;
     }
 
     /**
@@ -266,6 +250,14 @@ class Item extends Entity implements SprintlyItem
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return \Dugan\Sprintly\Entities\Contracts\SprintlyProduct
+     */
+    public function getProduct()
+    {
+        return SprintlyService::instance()->products()->get($this->parent);
     }
 
     /**
