@@ -2,14 +2,15 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyProduct;
+use Dugan\Sprintly\SprintlyService;
 
 class Product extends Entity implements SprintlyProduct
 {
-    protected $name = '';
-    protected $archived = '';
-    protected $id = 0;
-    protected $admin = false;
-    protected $created_at = '';
+    protected $name;
+    protected $archived;
+    protected $id;
+    protected $admin;
+    protected $created_at;
     //These are the fields that Sprintly will allow us to update
     protected $updatabale = ['name','archived'];
     protected $webhook;
@@ -88,6 +89,18 @@ class Product extends Entity implements SprintlyProduct
     public function getWebhook()
     {
         return $this->webhook;
+    }
+
+    public function getPeople()
+    {
+        SprintlyService::instance()->setProductId($this->id);
+        return SprintlyService::instance()->people()->all();
+    }
+
+    public function getItems()
+    {
+        SprintlyService::instance()->setProductId($this->id);
+        return SprintlyService::instance()->items()->all();
     }
 
     /**

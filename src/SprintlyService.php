@@ -23,7 +23,7 @@ class SprintlyService
         $this->api = new Api(null, $email, $authKey);
     }
 
-    public static function instance($email, $authKey)
+    public static function instance($email = null, $authKey = null)
     {
         if(! self::$instance instanceof self) {
             self::$instance = new SprintlyService($email, $authKey);
