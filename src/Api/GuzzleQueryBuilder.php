@@ -112,7 +112,7 @@ class GuzzleQueryBuilder
     private function checkMethodName($method)
     {
         if (strpos($method, 'where') !== 0) {
-            throw new \Exception("Method {$method} does not exist", 500);
+            throw new \Exception('Method ' . $method . ' does not exist', 500);
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php  namespace Dugan\Sprintly\Api;
 
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
+
 class ApiEndpoint
 {
     const PRODUCTS = '/api/products.json';
