@@ -7,16 +7,29 @@ use Dugan\Sprintly\Repositories\ProductsRepository;
 
 class SprintlyService
 {
+    private static $instance;
     private $api;
     private $productId;
+    private $peopleRepository;
+    private $productsRepository;
+    private $itemsRepository;
 
     /**
      * @param $email
      * @param $authKey
      */
-    public function __construct($email, $authKey)
+    private function __construct($email, $authKey)
     {
         $this->api = new Api(null, $email, $authKey);
+    }
+
+    public static function instance($email, $authKey)
+    {
+        if(! self::$instance instanceof self) {
+            self::$instance = new SprintlyService($email, $authKey);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -41,7 +54,11 @@ class SprintlyService
      */
     public function getPeopleRepository()
     {
-        return new PeopleRepository($this->api, $this->productId);
+        if(! $this->peopleRepository instanceof PeopleRepository) {
+            $this->peopleRepository = new PeopleRepository($this->api, $this->productId);
+        }
+
+        return $this->peopleRepository;
     }
 
     /**
@@ -49,7 +66,11 @@ class SprintlyService
      */
     public function getItemsRepository()
     {
-        return new ItemsRepository($this->api, $this->productId);
+        if(! $this->itemsRepository instanceof ItemsRepository) {
+            $this->itemsRepository = new ItemsRepository($this->api, $this->productId);
+        }
+
+        return $this->itemsRepository;
     }
 
     /**
@@ -57,7 +78,11 @@ class SprintlyService
      */
     public function getProductsRepository()
     {
-        return new ProductsRepository($this->api, $this->productId);
+        if(! $this->productsRepository instanceof ProductsRepository) {
+            $this->productsRepository = new ProductsRepository($this->api, $this->productId);
+        }
+
+        return $this->productsRepository;
     }
 
     /**
