@@ -52,7 +52,7 @@ class ItemTest extends BaseTest {
     public function convertsToArray()
     {
         $array = $this->resource->toArray();
-        $this->assertArrayHasKey('story', $array);
+        $this->assertArrayHasKey('title', $array);
         $this->assertArrayNotHasKey('who', $array);
     }
 
@@ -72,7 +72,7 @@ class ItemTest extends BaseTest {
     public function convertsToCreatableArray()
     {
         $array = $this->resource->getCreatableArray();
-        $this->assertArrayHasKey('story', $array);
+        $this->assertArrayHasKey('title', $array);
         $this->assertArrayNotHasKey('who', $array);
     }
 
