@@ -90,5 +90,4 @@ abstract class Entity
     {
         return strtolower(explode($access, $methodName)[1]);
     }
-
 }
