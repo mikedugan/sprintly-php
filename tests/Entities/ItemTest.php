@@ -75,4 +75,27 @@ class ItemTest extends BaseTest {
         $this->assertArrayHasKey('story', $array);
         $this->assertArrayNotHasKey('who', $array);
     }
+
+
+    /**
+    * @test
+    */
+    public function createsPersonFromAssignedTo()
+    {
+        $this->resource->setAssignedTo(['first_name' => 'John']);
+        $person = $this->resource->getAssignedTo();
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Person', $person);
+        $this->assertEquals('John', $person->getFirstName());
+    }
+
+    /**
+    * @test
+    */
+    public function createsPersonFromCreatedBy()
+    {
+        $this->resource->setCreatedBy(['first_name' => 'John']);
+        $person = $this->resource->getCreatedBy();
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Person', $person);
+        $this->assertEquals('John', $person->getFirstName());
+    }
 }

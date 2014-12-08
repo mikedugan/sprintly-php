@@ -190,6 +190,7 @@ class Item extends Entity implements SprintlyItem
      */
     public function getCreatedBy()
     {
+        if(! is_array($this->created_by)) return $this->created_by;
         return PersonFactory::fromArray($this->created_by);
     }
 
@@ -224,9 +225,7 @@ class Item extends Entity implements SprintlyItem
      */
     public function getAssignedTo()
     {
-        if(is_null($this->assigned_to)) {
-            return null;
-        }
+        if(! is_array($this->assigned_to)) return $this->assigned_to;
 
         return PersonFactory::fromArray($this->assigned_to);
     }
