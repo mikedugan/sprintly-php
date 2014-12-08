@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Entities;
+<?php namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
@@ -22,9 +22,9 @@ class Item extends Entity implements SprintlyItem
     protected $assigned_to;
     protected $type;
     //These are the fields that the Sprintly API will allow us to update
-    protected $updatable = ['type','title','description','score','status','assigned_to','tags','parent'];
+    protected $updatable = ['type', 'title', 'description', 'score', 'status', 'assigned_to', 'tags', 'parent'];
     //These are the fields that can be updated on a story
-    protected $storyUpdatable = ['what','why','who'];
+    protected $storyUpdatable = ['what', 'why', 'who'];
 
     /**
      * @return mixed
@@ -87,7 +87,7 @@ class Item extends Entity implements SprintlyItem
 
     public function setStoryWhat($what)
     {
-       $this->story['what'] = $what;
+        $this->story['what'] = $what;
     }
 
     public function getStoryWhy()
@@ -190,7 +190,9 @@ class Item extends Entity implements SprintlyItem
      */
     public function getCreatedBy()
     {
-        if(! is_array($this->created_by)) return $this->created_by;
+        if (! is_array($this->created_by)) {
+            return $this->created_by;
+        }
         return PersonFactory::fromArray($this->created_by);
     }
 
@@ -225,7 +227,9 @@ class Item extends Entity implements SprintlyItem
      */
     public function getAssignedTo()
     {
-        if(! is_array($this->assigned_to)) return $this->assigned_to;
+        if (! is_array($this->assigned_to)) {
+            return $this->assigned_to;
+        }
 
         return PersonFactory::fromArray($this->assigned_to);
     }
@@ -300,13 +304,13 @@ class Item extends Entity implements SprintlyItem
     public function toArray()
     {
         $props = get_object_vars($this);
-        foreach($props as $k => $v) {
-            if(! in_array($k, $this->updatable)) {
+        foreach ($props as $k => $v) {
+            if (! in_array($k, $this->updatable)) {
                 unset($props[$k]);
             }
         }
         unset($props['number']);
-        if(isset($props['story'])) {
+        if (isset($props['story'])) {
             unset($props['title']);
             unset($props['story']);
             $props['who'] = $this->story['who'];
@@ -326,12 +330,12 @@ class Item extends Entity implements SprintlyItem
     public function getUpdateArray()
     {
         $buffer = [];
-        foreach($this->updatable as $key) {
-           $buffer[$key] = $this->{$key};
+        foreach ($this->updatable as $key) {
+            $buffer[$key] = $this->{$key};
         }
 
-        if($this->getType() === 'story') {
-            foreach($this->storyUpdatable as $key) {
+        if ($this->getType() === 'story') {
+            foreach ($this->storyUpdatable as $key) {
                 $buffer[$key] = $this->{$key};
             }
         }
