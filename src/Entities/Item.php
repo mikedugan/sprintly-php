@@ -2,6 +2,8 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
+use Dugan\Sprintly\Factories\PersonFactory;
+use Dugan\Sprintly\SprintlyService;
 
 class Item extends Entity implements SprintlyItem
 {
@@ -49,23 +51,6 @@ class Item extends Entity implements SprintlyItem
     public function setParent($parent)
     {
         $this->parent = $parent;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param $product
-     * @return void
-     */
-    public function setProduct($product)
-    {
-        $this->product = $product;
     }
 
     /**
@@ -205,7 +190,8 @@ class Item extends Entity implements SprintlyItem
      */
     public function getCreatedBy()
     {
-        return $this->created_by;
+        if(! is_array($this->created_by)) return $this->created_by;
+        return PersonFactory::fromArray($this->created_by);
     }
 
     /**
@@ -239,7 +225,9 @@ class Item extends Entity implements SprintlyItem
      */
     public function getAssignedTo()
     {
-        return $this->assigned_to;
+        if(! is_array($this->assigned_to)) return $this->assigned_to;
+
+        return PersonFactory::fromArray($this->assigned_to);
     }
 
     /**
@@ -266,6 +254,14 @@ class Item extends Entity implements SprintlyItem
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return \Dugan\Sprintly\Entities\Contracts\SprintlyProduct
+     */
+    public function getProduct()
+    {
+        return SprintlyService::instance()->products()->get($this->parent);
     }
 
     /**

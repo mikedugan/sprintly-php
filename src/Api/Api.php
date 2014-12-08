@@ -1,11 +1,9 @@
 <?php  namespace Dugan\Sprintly\Api;
 
-use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\ResponseInterface;
-use GuzzleHttp\Query;
 
 /**
  * This is the core API class. This class is responsible for coordinating the GET/POST/DELETE methods
@@ -44,42 +42,15 @@ class Api
      * @throws SprintlyApiException
      * @return ResponseInterface
      */
-    public function get($endpoint, $data = null, $queryParams = null)
+    public function get(ApiEndpoint $endpoint, $data = null, $queryParams = null)
     {
-        $endpoint = $this->buildUrl($endpoint, $data);
-        $request = $this->buildQueryParameters($this->client->createRequest('GET', $endpoint), $queryParams);
+        $request = $this->client->createRequest('GET', $endpoint->getUrl($data));
+        if($queryParams) {
+            $request->setQuery(GuzzleQueryBuilder::fromQueryParams($queryParams));
+        }
         $response = $this->execute($request);
 
         return $response;
-    }
-
-    /**
-     * Accepts and modifies a Request, building in the query parameters
-     *
-     * @param Request $request
-     * @param null    $data
-     * @return Request
-     */
-    protected function buildQueryParameters(Request $request, $data = null)
-    {
-        //Just in case no URL data was passed in
-        if(! $data) {
-            return $request;
-        }
-
-        //If a Query object was passed in, we'll go ahead and set that on the request
-        if($data instanceof Query) {
-           $request->setQuery($data);
-            return $request;
-        }
-
-        //get the query object and iterate over it, assigning the data values
-        $query = $request->getQuery();
-        foreach($data as $k => $v) {
-            $query->set($k, $v);
-        }
-
-        return $request;
     }
 
     /**
@@ -91,10 +62,9 @@ class Api
      * @throws SprintlyApiException
      * @return ResponseInterface
      */
-    public function post($endpoint, $urlData, $postData)
+    public function post(ApiEndpoint $endpoint, $urlData, $postData)
     {
-        $endpoint = $this->buildUrl($endpoint, $urlData);
-        $request = $this->client->createRequest('POST', $endpoint);
+        $request = $this->client->createRequest('POST', $endpoint->getUrl($urlData));
         $requestBody = $request->getBody();
 
         //Iterate over the postData and assign it to the request body
@@ -118,10 +88,9 @@ class Api
      * @throws SprintlyApiException
      * @return ResponseInterface
      */
-    public function delete($endpoint, $data)
+    public function delete(ApiEndpoint $endpoint, $data)
     {
-        $endpoint = $this->buildUrl($endpoint, $data);
-        $request = $this->client->createRequest('DELETE', $endpoint);
+        $request = $this->client->createRequest('DELETE', $endpoint->getUrl($data));
         $response = $this->execute($request);
 
         return $response;
@@ -146,59 +115,5 @@ class Api
         }
 
         return $response;
-    }
-
-    /**
-     * A very compact template engine for populating placeholders in API endpoints
-     *
-     * The array of $objects should contain either key-value pairs or SprintlyObjects
-     *
-     * @param ApiEndpoint $endpoint
-     * @param array       $objects
-     * @return string
-     */
-    private function buildUrl(ApiEndpoint $endpoint, array $objects = null)
-    {
-        //We're using a raw endpoint such as /api/products.json
-        if (! $objects) {
-            return 'https://sprint.ly' . $endpoint->endpoint();
-        }
-
-        //iterates over each object and parses the parameters from it
-        //note that an object can be a SprintlyObject|array
-        foreach ($objects as $object) {
-            $this->parseParameters($endpoint, $object);
-        }
-
-        return 'https://sprint.ly' . $endpoint->endpoint();
-    }
-
-    /**
-     * @param ApiEndpoint $endpoint
-     * @param             $object
-     * @return void
-     */
-    private function parseParameters(ApiEndpoint $endpoint, $object)
-    {
-        //If a SprintlyObject was passed it, let's assign the endpoint vars to the $object
-        if ($object instanceof SprintlyObject) {
-            $object = $object->getEndpointVars();
-        }
-
-        $this->assignValues($endpoint, $object);
-    }
-
-    /**
-     * @param ApiEndpoint $endpoint
-     * @param             $object
-     * @return void
-     */
-    private function assignValues(ApiEndpoint $endpoint, $object)
-    {
-        if(is_null($object)) return;
-        foreach ($object as $key => $value) {
-            //the endpoint has a self-modifying method to replace the placeholder
-            $endpoint->replace($key, $value);
-        }
     }
 }

@@ -52,9 +52,13 @@ on a given product.
 
 How to instantiate the API with your credentials:
 
-`$service = new \Dugan\Sprintly\SprintlyService($myEmail, $myAuthkey);`
+`$service = \Dugan\Sprintly\SprintlyService::instance($myEmail, $myAuthkey);`
 
 All examples after this will assume `$service` has already been instantiated with your credentials.
+
+Since the SprintlyService implements the Singleton pattern, we can avoid having to repeatedly instantiate it when it is needed in different places. To retrieve an existing instance, simply call:
+
+`\Dugan\Sprintly\SprintlyService::instance()`
 
 ### Common Functionality
 
@@ -118,6 +122,7 @@ Retrieve a collection of products (but not all of them!):
 
 Returns an array of `\Dugan\Sprintly\Entities\Product`
 
+<<<<<<< HEAD
 The returned product will have several properties on it which are available for your use:
 
 ```
@@ -136,10 +141,12 @@ Most of the entities represented by the Sprintly API are only accessible in the 
 
 Unless otherwise noted, from here on out you should assume all code examples are preceded by:
 
-`$service->setId($productId)`
+`$service->setProductId($productId)`
 
 This will allow the service to automatically inject the product ID into the appropriate repositories
 before returning them back to you.
+
+Note that the SprintlyService is a singleton, and will therefore retain the last product ID set on it until you set another product ID on it.
 
 ### Users
 

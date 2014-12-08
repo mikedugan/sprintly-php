@@ -50,6 +50,4 @@ class PeopleRepository extends BaseRepository implements Repository
     {
         return $this->primaryId;
     }
-
-
 }

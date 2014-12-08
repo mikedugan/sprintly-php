@@ -2,16 +2,17 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyProduct;
+use Dugan\Sprintly\SprintlyService;
 
 class Product extends Entity implements SprintlyProduct
 {
-    protected $name = '';
-    protected $archived = '';
-    protected $id = 0;
-    protected $admin = false;
-    protected $created_at = '';
+    protected $name;
+    protected $archived;
+    protected $id;
+    protected $admin;
+    protected $created_at;
     //These are the fields that Sprintly will allow us to update
-    protected $updatabale = ['name','archived'];
+    protected $updatable = ['name','archived'];
     protected $webhook;
 
     /**
@@ -90,6 +91,18 @@ class Product extends Entity implements SprintlyProduct
         return $this->webhook;
     }
 
+    public function getPeople()
+    {
+        SprintlyService::instance()->setProductId($this->id);
+        return SprintlyService::instance()->people()->all();
+    }
+
+    public function getItems()
+    {
+        SprintlyService::instance()->setProductId($this->id);
+        return SprintlyService::instance()->items()->all();
+    }
+
     /**
      * @return array
      */
@@ -119,7 +132,9 @@ class Product extends Entity implements SprintlyProduct
      */
     public function toArray()
     {
-        return get_object_vars($this);
+        $array = get_object_vars($this);
+        unset($array['updatable']);
+        return $array;
     }
 
     /**
@@ -130,7 +145,7 @@ class Product extends Entity implements SprintlyProduct
     public function getUpdateArray()
     {
         $buffer = [];
-        foreach($this->updatabale as $key) {
+        foreach($this->updatable as $key) {
             $buffer[$key] = $this->{$key};
         }
 

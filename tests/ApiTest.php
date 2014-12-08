@@ -19,7 +19,7 @@ class ApiTest extends BaseTest
         $client->shouldReceive('send')->with('GuzzleHttp\Message\Request')->andReturn(true);
         $request = \Mockery::mock('GuzzleHttp\Message\Request');
         $request->shouldReceive('getQuery')->andReturn($query);
-        $request->shouldReceive('setQuery')->with('GuzzleHttp\Query')->andReturnNull();
+        $request->shouldReceive('setQuery')->andReturnNull();
         $client->shouldReceive('createRequest')->andReturn($request);
         $this->resource = new Api($client, 'foo@bar.com', 'abcdefg');
     }
