@@ -20,32 +20,6 @@ class Person extends Entity implements SprintlyPerson
     }
 
     /**
-     * @param $id
-     * @return void
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-
-    /**
-     * @param bool $admin
-     * @return void
-     */
-    public function setAdmin($admin = false)
-    {
-        $this->admin = $admin;
-    }
-
-    /**
      * @return mixed
      */
     public function getFirstName()
@@ -77,23 +51,6 @@ class Person extends Entity implements SprintlyPerson
     public function setLastName($lastName)
     {
         $this->last_name = $lastName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param $email
-     * @return void
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     /**

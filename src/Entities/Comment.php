@@ -5,44 +5,10 @@ use Dugan\Sprintly\Entities\Contracts\SprintlyComment;
 
 class Comment extends Entity implements SprintlyComment
 {
-    private $body;
-    private $type;
-    private $id;
-    private $createdBy;
-
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param $body
-     * @return void
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param $type
-     * @return void
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
+    protected $body;
+    protected $type;
+    protected $id;
+    protected $createdBy;
 
     /**
      * @return mixed
@@ -50,15 +16,6 @@ class Comment extends Entity implements SprintlyComment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param $id
-     * @return void
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

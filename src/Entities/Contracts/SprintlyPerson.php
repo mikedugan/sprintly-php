@@ -2,12 +2,6 @@
 
 interface SprintlyPerson extends SprintlyObject
 {
-
-    /**
-     * @return boolean
-     */
-    public function getAdmin();
-
     /**
      * @return mixed
      */
@@ -17,11 +11,6 @@ interface SprintlyPerson extends SprintlyObject
      * @return mixed
      */
     public function getLastName();
-
-    /**
-     * @return mixed
-     */
-    public function getEmail();
 
     /**
      * @return integer

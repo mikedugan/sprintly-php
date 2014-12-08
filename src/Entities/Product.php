@@ -16,79 +16,11 @@ class Product extends Entity implements SprintlyProduct
     protected $webhook;
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $name
-     * @return void
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getArchived()
-    {
-        return $this->archived;
-    }
-
-    /**
-     * @param $archived
-     * @return void
-     */
-    public function setArchived($archived)
-    {
-        $this->archived = $archived;
-    }
-
-    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param $id
-     * @return void
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-
-    /**
-     * @param $admin
-     * @return void
-     */
-    public function setAdmin($admin)
-    {
-        $this->admin = $admin;
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebhook()
-    {
-        return $this->webhook;
     }
 
     public function getPeople()

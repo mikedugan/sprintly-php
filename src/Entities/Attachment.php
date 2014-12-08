@@ -5,12 +5,12 @@ use Dugan\Sprintly\Entities\Contracts\SprintlyAttachment;
 
 class Attachment extends Entity implements SprintlyAttachment
 {
-    private $createdAt;
-    private $createdBy;
-    private $link;
-    private $id;
-    private $item;
-    private $name;
+    protected $createdAt;
+    protected $createdBy;
+    protected $link;
+    protected $id;
+    protected $item;
+    protected $name;
 
     /**
      * @return mixed
@@ -49,35 +49,9 @@ class Attachment extends Entity implements SprintlyAttachment
     /**
      * @return mixed
      */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * @param $link
-     * @return void
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param $id
-     * @return void
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -86,32 +60,6 @@ class Attachment extends Entity implements SprintlyAttachment
     public function getItem()
     {
         return $this->item;
-    }
-
-    /**
-     * @param $item
-     * @return void
-     */
-    public function setItem($item)
-    {
-        $this->item = $item;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $name
-     * @return void
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     /**

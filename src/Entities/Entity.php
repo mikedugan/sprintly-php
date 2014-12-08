@@ -60,4 +60,35 @@ abstract class Entity
     {
        return $this->toArray();
     }
+
+    public function __call($name, $args)
+    {
+        $method = strpos($name, 'set') === 0 ? 'set' : 'get';
+        $property = $this->getTargetProperty($name, $method);
+        if($method === 'set') {
+            return $this->magicSetter($property, $args[0]);
+        }
+
+        return $this->magicGetter($property);
+    }
+
+    protected function magicSetter($property, $value)
+    {
+        if(array_key_exists($property, get_object_vars($this))) {
+            $this->{$property} = $value;
+        }
+    }
+
+    protected function magicGetter($property)
+    {
+        if(array_key_exists($property, get_object_vars($this))) {
+            return $this->{$property};
+        }
+    }
+
+    protected function getTargetProperty($methodName, $access)
+    {
+        return strtolower(explode($access, $methodName)[1]);
+    }
+
 }

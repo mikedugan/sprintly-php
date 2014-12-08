@@ -26,50 +26,6 @@ class Item extends Entity implements SprintlyItem
     //These are the fields that can be updated on a story
     protected $storyUpdatable = ['what', 'why', 'who'];
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param $status
-     * @return void
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProgress()
-    {
-        return $this->progress;
-    }
-
-    /**
-     * @param $progress
-     * @return void
-     */
-    public function setProgress($progress)
-    {
-        $this->progress = $progress;
-    }
-
     public function getStoryWho()
     {
         return $this->story['who'];
@@ -103,91 +59,6 @@ class Item extends Entity implements SprintlyItem
     /**
      * @return mixed
      */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param $description
-     * @return void
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param $tags
-     * @return void
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
-
-    /**
-     * @param $number
-     * @return void
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getArchived()
-    {
-        return $this->archived;
-    }
-
-    /**
-     * @param $archived
-     * @return void
-     */
-    public function setArchived($archived)
-    {
-        $this->archived = $archived;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param $title
-     * @return void
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCreatedBy()
     {
         if (! is_array($this->created_by)) {
@@ -203,23 +74,6 @@ class Item extends Entity implements SprintlyItem
     public function setCreatedBy($createdBy)
     {
         $this->created_by = $createdBy;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScore()
-    {
-        return $this->score;
-    }
-
-    /**
-     * @param $score
-     * @return void
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
     }
 
     /**
@@ -241,23 +95,6 @@ class Item extends Entity implements SprintlyItem
     public function setAssignedTo($assignedTo)
     {
         $this->assigned_to = $assignedTo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param $type
-     * @return void
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
     }
 
     /**
