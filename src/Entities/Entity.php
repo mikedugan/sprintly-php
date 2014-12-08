@@ -24,11 +24,16 @@ abstract class Entity
     public function fill($attributes)
     {
         foreach ($attributes as $name => $value) {
-            if (property_exists($this, $name)) {
-                $this->{$name} = $value;
-            }
+            $this->fillAttribute($name, $value);
         }
         return $this;
+    }
+
+    public function fillAttribute($attribute, $value)
+    {
+        if (property_exists($this, $attribute)) {
+            $this->{$attribute} = $value;
+        }
     }
 
     /**

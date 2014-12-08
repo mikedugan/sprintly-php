@@ -122,6 +122,7 @@ class ApiEndpoint
      */
     private function assignValues($object)
     {
+        if(is_null($object)) return;
         foreach ($object as $key => $value) {
             //the endpoint has a self-modifying method to replace the placeholder
             $this->replace($key, $value);

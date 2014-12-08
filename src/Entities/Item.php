@@ -2,6 +2,7 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
+use Dugan\Sprintly\Factories\PersonFactory;
 use Dugan\Sprintly\SprintlyService;
 
 class Item extends Entity implements SprintlyItem
@@ -189,7 +190,7 @@ class Item extends Entity implements SprintlyItem
      */
     public function getCreatedBy()
     {
-        return $this->created_by;
+        return PersonFactory::fromArray($this->created_by);
     }
 
     /**
@@ -223,7 +224,11 @@ class Item extends Entity implements SprintlyItem
      */
     public function getAssignedTo()
     {
-        return $this->assigned_to;
+        if(is_null($this->assigned_to)) {
+            return null;
+        }
+
+        return PersonFactory::fromArray($this->assigned_to);
     }
 
     /**
