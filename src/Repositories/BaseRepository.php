@@ -82,7 +82,8 @@ abstract class BaseRepository
      */
     public function all()
     {
-        $response = $this->api->get($this->collectionEndpoint(),
+        $response = $this->api->get(
+            $this->collectionEndpoint(),
             [$this->getCollectionEndpointVars()]
         );
 

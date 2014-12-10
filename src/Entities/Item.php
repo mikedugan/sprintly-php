@@ -57,6 +57,11 @@ class Item extends Entity implements SprintlyObject
         $this->story['why'] = $why;
     }
 
+    public function getAttachments()
+    {
+
+    }
+
     /**
      * @return mixed
      */

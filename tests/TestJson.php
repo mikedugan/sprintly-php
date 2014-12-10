@@ -175,5 +175,136 @@ class TestJson
             "email": "joe@joestump.net"
         }';
     }
+
+    public static function allAttachmentsJson()
+    {
+        return '[
+    {
+        "created_at": "2012-08-16T23:35:14+00:00",
+        "created_by": {
+            "created_at": "2012-06-15T20:30:56+00:00",
+            "email": "grantgarrett@example.com",
+            "first_name": "Grant",
+            "id": 4444,
+            "last_login": "2012-08-28T18:24:12+00:00",
+            "last_name": "Garrett"
+        },
+        "href": "https://sprint.ly/product/1111/file/9999999",
+        "id": 9999999,
+        "item": {
+            "archived": false,
+            "assigned_to": {
+                "created_at": "2012-06-15T20:30:56+00:00",
+                "email": "grantgarrett@example.com",
+                "first_name": "Grant",
+                "id": 4444,
+                "last_login": "2012-08-28T18:24:12+00:00",
+                "last_name": "Garrett"
+            },
+            "created_at": "2012-08-12T05:45:22+00:00",
+            "created_by": {
+                "created_at": "2011-06-07T21:10:52+00:00",
+                "email": "joe@example.com",
+                "first_name": "Joe",
+                "id": 1111,
+                "last_login": "2012-09-01T20:14:40+00:00",
+                "last_name": "Stump"
+            },
+            "description": "",
+            "email": {
+                "discussion": "discussion-222@example.com",
+                "files": "files-222@example.com"
+            },
+            "last_modified": "2012-08-27T01:44:10+00:00",
+            "number": 2222,
+            "product": {
+                "archived": false,
+                "id": 1111,
+                "name": "sprint.ly"
+            },
+            "progress": {
+                "started_at": "2012-08-21T16:38:13+00:00"
+            },
+            "score": "M",
+            "short_url": "http://sprint.ly/i/11111/2222/",
+            "status": "in-progress",
+            "tags": [
+                "chrome"
+            ],
+            "title": "As a user, I want a snazzy design for the Sprint.ly Chrome extension so that my list of work is at least aesthetically pleasing.",
+            "type": "story",
+            "what": "a snazzy design for the Sprint.ly Chrome extension",
+            "who": "user",
+            "why": "my list of work is at least aesthetically pleasing"
+        },
+        "name": "chrome-not-work.png"
+        }
+        ]';
+    }
+
+    public static function singleAttachmentJson()
+    {
+        return '
+        {
+        "created_at": "2012-08-16T23:35:14+00:00",
+        "created_by": {
+            "created_at": "2012-06-15T20:30:56+00:00",
+            "email": "grantgarrett@example.com",
+            "first_name": "Grant",
+            "id": 4444,
+            "last_login": "2012-08-28T18:24:12+00:00",
+            "last_name": "Garrett"
+        },
+        "href": "https://sprint.ly/product/1111/file/9999999",
+        "id": 9999999,
+        "item": {
+            "archived": false,
+            "assigned_to": {
+                "created_at": "2012-06-15T20:30:56+00:00",
+                "email": "grantgarrett@example.com",
+                "first_name": "Grant",
+                "id": 4444,
+                "last_login": "2012-08-28T18:24:12+00:00",
+                "last_name": "Garrett"
+            },
+            "created_at": "2012-08-12T05:45:22+00:00",
+            "created_by": {
+                "created_at": "2011-06-07T21:10:52+00:00",
+                "email": "joe@example.com",
+                "first_name": "Joe",
+                "id": 1111,
+                "last_login": "2012-09-01T20:14:40+00:00",
+                "last_name": "Stump"
+            },
+            "description": "",
+            "email": {
+                "discussion": "discussion-222@example.com",
+                "files": "files-222@example.com"
+            },
+            "last_modified": "2012-08-27T01:44:10+00:00",
+            "number": 2222,
+            "product": {
+                "archived": false,
+                "id": 1111,
+                "name": "sprint.ly"
+            },
+            "progress": {
+                "started_at": "2012-08-21T16:38:13+00:00"
+            },
+            "score": "M",
+            "short_url": "http://sprint.ly/i/11111/2222/",
+            "status": "in-progress",
+            "tags": [
+                "chrome"
+            ],
+            "title": "As a user, I want a snazzy design for the Sprint.ly Chrome extension so that my list of work is at least aesthetically pleasing.",
+            "type": "story",
+            "what": "a snazzy design for the Sprint.ly Chrome extension",
+            "who": "user",
+            "why": "my list of work is at least aesthetically pleasing"
+        },
+        "name": "chrome-not-work.png"
+        }';
+    }
 }
 

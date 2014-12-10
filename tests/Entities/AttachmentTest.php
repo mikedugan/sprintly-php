@@ -26,7 +26,7 @@ class AttachmentTest extends BaseTest {
     */
     public function setsAndGetsProperties()
     {
-        $props = ['created_at', 'created_by', 'link', 'id', 'item', 'name'];
+        $props = ['created_at', 'created_by', 'href', 'id', 'name'];
         foreach($props as $prop) {
             $set = 'set'.Util::toCamel($prop);
             $get = 'get'.Util::toCamel($prop);

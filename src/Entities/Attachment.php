@@ -3,22 +3,20 @@
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyAttachment;
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
+use Dugan\Sprintly\SprintlyService;
 
 class Attachment extends Entity implements SprintlyObject
 {
-    protected $created_at;
-    protected $created_by;
-    protected $link;
     protected $id;
     protected $item;
     protected $name;
+    protected $href;
+    protected $created_at;
+    protected $created_by;
 
-    /**
-     * @return mixed
-     */
     public function getItem()
     {
-        return $this->item;
+        return SprintlyService::instance()->items()->get($this->item['number']);
     }
 
     /**

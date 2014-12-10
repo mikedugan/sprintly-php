@@ -1,6 +1,7 @@
 <?php  namespace Dugan\Sprintly;
 
 use Dugan\Sprintly\Api\Api;
+use Dugan\Sprintly\Repositories\AttachmentsRepository;
 use Dugan\Sprintly\Repositories\ItemsRepository;
 use Dugan\Sprintly\Repositories\PeopleRepository;
 use Dugan\Sprintly\Repositories\ProductsRepository;
@@ -9,10 +10,12 @@ class SprintlyService
 {
     private static $instance;
     private $api;
-    private $productId;
     private $peopleRepository;
     private $productsRepository;
     private $itemsRepository;
+
+    private $productId;
+    private $itemId;
 
     /**
      * @param $email
@@ -49,6 +52,16 @@ class SprintlyService
         $this->productId = $productId;
     }
 
+    public function getItemId()
+    {
+        return $this->itemId;
+    }
+
+    public function setItemId($itemId)
+    {
+        $this->itemId = $itemId;
+    }
+
     /**
      * @return PeopleRepository
      */
@@ -83,6 +96,16 @@ class SprintlyService
         }
 
         return $this->productsRepository;
+    }
+
+    public function getAttachmentsRepository($id = null)
+    {
+        $itemId = is_null($id) ? $this->itemId : $id;
+        if(is_null($itemId)) {
+            throw new \InvalidArgumentException("Missing item id");
+        }
+
+        return new AttachmentsRepository($this->api, $this->productId, $itemId);
     }
 
     /**
