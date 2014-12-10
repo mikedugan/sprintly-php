@@ -98,6 +98,10 @@ class SprintlyService
         return $this->productsRepository;
     }
 
+    /**
+     * @param null $id
+     * @return AttachmentsRepository
+     */
     public function getAttachmentsRepository($id = null)
     {
         $itemId = is_null($id) ? $this->itemId : $id;
@@ -130,5 +134,14 @@ class SprintlyService
     public function people()
     {
         return $this->getPeopleRepository();
+    }
+
+    /**
+     * @param null $id
+     * @return AttachmentsRepository
+     */
+    public function attachments($id = null)
+    {
+        return $this->getAttachmentsRepository($id);
     }
 }

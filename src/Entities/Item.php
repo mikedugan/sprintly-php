@@ -59,7 +59,7 @@ class Item extends Entity implements SprintlyObject
 
     public function getAttachments()
     {
-
+        return SprintlyService::instance()->attachments($this->number)->all();
     }
 
     /**
