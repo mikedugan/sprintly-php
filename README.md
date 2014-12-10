@@ -31,13 +31,10 @@ composer update
 ```
 ```
 $service = new \Dugan\Sprintly\SprintlyService('myemail@example.net', 'mySprintlyAuthKey');
-$products = $service->getAllProducts();
+$products = $service->getProductsRepository()->all();
 foreach($products as $product) {
     echo $product->getName()."\n";
 }
-
-//Do the same thing without using the helper:
-$products = $service->getProductsRepository()->all();
 ```
 
 ## How it Works
