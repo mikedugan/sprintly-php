@@ -1,7 +1,7 @@
 <?php  namespace Dugan\Sprintly\Repositories;
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
-use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
+use Dugan\Sprintly\Entities\Person;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 
 class PeopleRepository extends BaseRepository implements Repository
@@ -12,11 +12,11 @@ class PeopleRepository extends BaseRepository implements Repository
     /**
      * Executes a POST operation to invite a user to a product
      *
-     * @param SprintlyPerson $person
+     * @param Person $person
      * @param bool           $admin
-     * @return SprintlyPerson
+     * @return Person
      */
-    public function invite(SprintlyPerson $person, $admin = false)
+    public function invite(Person $person, $admin = false)
     {
         $data = [
             'first_name' => $person->getFirstName(),

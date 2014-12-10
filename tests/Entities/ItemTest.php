@@ -17,7 +17,7 @@ class ItemTest extends BaseTest {
     */
     public function itemIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $this->resource);
     }
 
     /**
@@ -36,7 +36,7 @@ class ItemTest extends BaseTest {
     public function setsAndGetsProperties()
     {
         $props = ['status', 'parent', 'progress', 'description', 'tags',
-            'number', 'archived', 'title', 'createdBy', 'score', 'assignedTo'];
+            'number', 'archived', 'title', 'created_by', 'score', 'assignedTo'];
 
         foreach($props as $prop) {
             $prop = ucfirst($prop);

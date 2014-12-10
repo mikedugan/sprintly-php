@@ -2,57 +2,16 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Entities\Contracts\SprintlyAttachment;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 
-class Attachment extends Entity implements SprintlyAttachment
+class Attachment extends Entity implements SprintlyObject
 {
-    protected $createdAt;
-    protected $createdBy;
+    protected $created_at;
+    protected $created_by;
     protected $link;
     protected $id;
     protected $item;
     protected $name;
-
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param $createdAt
-     * @return void
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * @param $createdBy
-     * @return void
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return mixed

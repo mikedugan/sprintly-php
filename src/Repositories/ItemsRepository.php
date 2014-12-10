@@ -2,7 +2,7 @@
 
 use Dugan\Sprintly\Api\ApiEndpoint;
 use Dugan\Sprintly\Api\GuzzleQueryBuilder;
-use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
+use Dugan\Sprintly\Entities\Item;
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Repositories\Contracts\Repository;
 use GuzzleHttp\Query;
@@ -32,10 +32,10 @@ class ItemsRepository extends BaseRepository implements Repository
     /**
      * Executes a GET operation to retrieve children of a story item
      *
-     * @param SprintlyItem $item
+     * @param Item $item
      * @return array|bool
      */
-    public function children(SprintlyItem $item)
+    public function children(Item $item)
     {
         if ($item->getType() !== 'story') {
             return false;

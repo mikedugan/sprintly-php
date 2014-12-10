@@ -1,39 +1,14 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Entities\Contracts\SprintlyComment;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 
-class Comment extends Entity implements SprintlyComment
+class Comment extends Entity implements SprintlyObject
 {
     protected $body;
     protected $type;
     protected $id;
-    protected $createdBy;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * @param $createdBy
-     * @return void
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-    }
+    protected $created_by;
 
     /**
      * @return ApiEndpoint

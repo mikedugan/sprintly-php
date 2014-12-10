@@ -1,23 +1,15 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Entities\Contracts\SprintlyAnnotation;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 
-class Annotation extends Entity implements SprintlyAnnotation
+class Annotation extends Entity implements SprintlyObject
 {
     protected $action;
     protected $body;
     protected $id;
     protected $person;
     protected $verb;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return mixed

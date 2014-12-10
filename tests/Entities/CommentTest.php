@@ -17,7 +17,7 @@ class CommentTest extends BaseTest {
     */
     public function commentIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyComment', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Comment', $this->resource);
     }
 
     /**

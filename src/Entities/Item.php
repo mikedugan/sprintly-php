@@ -1,11 +1,11 @@
 <?php namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Entities\Contracts\SprintlyItem;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Factories\PersonFactory;
 use Dugan\Sprintly\SprintlyService;
 
-class Item extends Entity implements SprintlyItem
+class Item extends Entity implements SprintlyObject
 {
     protected $status;
     protected $parent;
@@ -21,6 +21,7 @@ class Item extends Entity implements SprintlyItem
     protected $score;
     protected $assigned_to;
     protected $type;
+
     //These are the fields that the Sprintly API will allow us to update
     protected $updatable = ['type', 'title', 'description', 'score', 'status', 'assigned_to', 'tags', 'parent'];
     //These are the fields that can be updated on a story
@@ -68,15 +69,6 @@ class Item extends Entity implements SprintlyItem
     }
 
     /**
-     * @param $createdBy
-     * @return void
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->created_by = $createdBy;
-    }
-
-    /**
      * @return mixed
      */
     public function getAssignedTo()
@@ -86,15 +78,6 @@ class Item extends Entity implements SprintlyItem
         }
 
         return PersonFactory::fromArray($this->assigned_to);
-    }
-
-    /**
-     * @param $assignedTo
-     * @return void
-     */
-    public function setAssignedTo($assignedTo)
-    {
-        $this->assigned_to = $assignedTo;
     }
 
     /**

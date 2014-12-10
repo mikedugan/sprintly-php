@@ -54,7 +54,7 @@ class PeopleRepositoryTest extends BaseTest
         $person->setLastName('Dugan');
         $person->setEmail('foo@bar.com');
         $response = $this->resource->invite($person);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyPerson', $response);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Person', $response);
         $this->assertEquals('Joe', $response->getFirstName());
     }
 }

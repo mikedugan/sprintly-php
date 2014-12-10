@@ -1,9 +1,9 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Entities\Contracts\SprintlyPerson;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 
-class Person extends Entity implements SprintlyPerson
+class Person extends Entity implements SprintlyObject
 {
     protected $admin;
     protected $first_name;
@@ -11,49 +11,7 @@ class Person extends Entity implements SprintlyPerson
     protected $email;
     protected $id;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFirstName()
-    {
-        return $this->first_name;
-    }
-
-    /**
-     * @param $firstName
-     * @return void
-     */
-    public function setFirstName($firstName)
-    {
-        $this->first_name = $firstName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastName()
-    {
-        return $this->last_name;
-    }
-
-    /**
-     * @param $lastName
-     * @return void
-     */
-    public function setLastName($lastName)
-    {
-        $this->last_name = $lastName;
-    }
-
-    /**
+   /**
      * @return ApiEndpoint
      */
     public function getSingleEndpoint()

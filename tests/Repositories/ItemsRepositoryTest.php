@@ -65,7 +65,7 @@ class ItemsRepositoryTest extends BaseTest {
         $this->clientReturnsAll();
         $response = $this->resource->all();
         $this->assertCount(2, $response);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response[0]);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response[0]);
         $this->assertEquals(188, $response[0]->getNumber());
     }
 
@@ -76,7 +76,7 @@ class ItemsRepositoryTest extends BaseTest {
     {
         $this->clientReturnsSingle();
         $response = $this->resource->get(5);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response);
         $this->assertEquals(188, $response->getNumber());
     }
 
@@ -90,7 +90,7 @@ class ItemsRepositoryTest extends BaseTest {
         $item->setType('task');
         $item->setTitle('do something');
         $response = $this->resource->create($item);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response);
         $this->assertEquals(188, $response->getNumber());
     }
 
@@ -104,7 +104,7 @@ class ItemsRepositoryTest extends BaseTest {
         $item->setType('task');
         $item->setTitle('do something');
         $response = $this->resource->update($item);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response);
         $this->assertEquals(188, $response->getNumber());
     }
 
@@ -118,7 +118,7 @@ class ItemsRepositoryTest extends BaseTest {
         $item->setType('task');
         $item->setTitle('do something');
         $response = $this->resource->delete($item);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response);
         $this->assertEquals(188, $response->getNumber());
     }
 
@@ -146,7 +146,7 @@ class ItemsRepositoryTest extends BaseTest {
         $item->setTitle('do something');
         $response = $this->resource->children($item);
         $this->assertCount(2, $response);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response[0]);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response[0]);
         $this->assertEquals(188, $response[0]->getNumber());
     }
 
@@ -158,7 +158,7 @@ class ItemsRepositoryTest extends BaseTest {
         $this->clientReturnsAll();
         $response = $this->resource->query()->whereTitle('do something')->retrieve();
         $this->assertCount(2, $response);
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyItem', $response[0]);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Item', $response[0]);
         $this->assertEquals(188, $response[0]->getNumber());
     }
 }

@@ -1,10 +1,10 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Entities\Contracts\SprintlyProduct;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\SprintlyService;
 
-class Product extends Entity implements SprintlyProduct
+class Product extends Entity implements SprintlyObject
 {
     protected $name;
     protected $archived;
@@ -14,14 +14,6 @@ class Product extends Entity implements SprintlyProduct
     //These are the fields that Sprintly will allow us to update
     protected $updatable = ['name','archived'];
     protected $webhook;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getPeople()
     {

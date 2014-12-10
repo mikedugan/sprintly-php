@@ -1,39 +1,14 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
 use Dugan\Sprintly\Api\ApiEndpoint;
-use Dugan\Sprintly\Entities\Contracts\SprintlyTag;
+use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 
-class Tag extends Entity implements SprintlyTag
+class Tag extends Entity implements SprintlyObject
 {
     protected $id;
     protected $tag;
-    protected $updatedAt;
+    protected $updated_at;
     protected $assignees;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param $updatedAt
-     * @return void
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
 
     /**
      * @return ApiEndpoint

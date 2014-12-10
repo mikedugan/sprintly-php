@@ -1,5 +1,7 @@
 <?php  namespace Dugan\Sprintly\Entities;
 
+use Dugan\Sprintly\Util;
+
 abstract class Entity
 {
     public function __construct(array $attributes = null)
@@ -88,6 +90,6 @@ abstract class Entity
 
     protected function getTargetProperty($methodName, $access)
     {
-        return strtolower(explode($access, $methodName)[1]);
+        return Util::toSnake(explode($access, $methodName)[1]);
     }
 }

@@ -17,7 +17,7 @@ class TagTest extends BaseTest {
     */
     public function tagIsInstantiated()
     {
-        $this->assertInstanceOf('Dugan\Sprintly\Entities\Contracts\SprintlyTag', $this->resource);
+        $this->assertInstanceOf('Dugan\Sprintly\Entities\Tag', $this->resource);
     }
 
     /**
