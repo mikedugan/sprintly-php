@@ -102,7 +102,7 @@ class SprintlyService
     {
         $itemId = is_null($id) ? $this->itemId : $id;
         if(is_null($itemId)) {
-            throw new \InvalidArgumentException("Missing item id");
+            throw new \InvalidArgumentException('Missing item id');
         }
 
         return new AttachmentsRepository($this->api, $this->productId, $itemId);
