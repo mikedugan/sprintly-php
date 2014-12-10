@@ -74,6 +74,9 @@ abstract class Entity
         return $this->magicGetter($property);
     }
 
+    /**
+     * @param string $property
+     */
     protected function magicSetter($property, $value)
     {
         if(array_key_exists($property, get_object_vars($this))) {
@@ -81,6 +84,9 @@ abstract class Entity
         }
     }
 
+    /**
+     * @param string $property
+     */
     protected function magicGetter($property)
     {
         if(array_key_exists($property, get_object_vars($this))) {
@@ -88,6 +94,9 @@ abstract class Entity
         }
     }
 
+    /**
+     * @param string $access
+     */
     protected function getTargetProperty($methodName, $access)
     {
         return Util::toSnake(explode($access, $methodName)[1]);
