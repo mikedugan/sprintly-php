@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mikedugan/sprintly-php.svg?branch=master)](https://travis-ci.org/mikedugan/sprintly-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mikedugan/sprintly-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mikedugan/sprintly-php/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mikedugan/sprintly-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mikedugan/sprintly-php/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/dugan/sprintly-php/v/stable.svg)](https://packagist.org/packages/dugan/sprintly-php) [![Total Downloads](https://poser.pugx.org/dugan/sprintly-php/downloads.svg)](https://packagist.org/packages/dugan/sprintly-php) [![Latest Unstable Version](https://poser.pugx.org/dugan/sprintly-php/v/unstable.svg)](https://packagist.org/packages/dugan/sprintly-php) [![License](https://poser.pugx.org/dugan/sprintly-php/license.svg)](https://packagist.org/packages/dugan/sprintly-php)
 
 This is a library that wraps the Sprint.ly API for PHP 5.4+.
