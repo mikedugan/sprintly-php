@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Repositories; 
+<?php  namespace Dugan\Sprintly\Repositories;
 
 use Dugan\Sprintly\Entities\Contracts\SprintlyObject;
 use Dugan\Sprintly\Api\Api;
@@ -39,7 +39,7 @@ class AttachmentsRepository extends BaseRepository
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     protected function getIdPropertyName()
     {

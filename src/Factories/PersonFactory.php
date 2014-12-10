@@ -1,4 +1,4 @@
-<?php  namespace Dugan\Sprintly\Factories; 
+<?php  namespace Dugan\Sprintly\Factories;
 
 use Dugan\Sprintly\Entities\Person;
 
@@ -27,7 +27,7 @@ class PersonFactory
      * @static
      * @param array $attributes
      * @param $attr
-     * @param $person
+     * @param Person $person
      * @return void
      */
     private static function assignAttribute(array $attributes, $attr, $person)
