@@ -34,4 +34,13 @@ class ApiEndpointTest extends \PHPUnit_Framework_TestCase {
         $this->resource->replace('product_id', 5);
         $this->assertEquals('/api/products/5.json', $this->resource->endpoint());
     }
+
+    /**
+    * @test
+    */
+    public function doesntAssignNullValues()
+    {
+        $result = $this->resource->buildUrl([null,null,null]);
+        $this->assertFalse(empty($result));
+    }
 }

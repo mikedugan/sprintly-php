@@ -49,6 +49,29 @@ class ItemTest extends BaseTest {
     /**
     * @test
     */
+    public function setsAndGetsStoryElements()
+    {
+        $this->assertNull($this->resource->setStoryWho('who'));
+        $this->assertNull($this->resource->setStoryWhat('what'));
+        $this->assertNull($this->resource->setStoryWhy('why'));
+
+        $this->assertEquals('who', $this->resource->getStoryWho('who'));
+        $this->assertEquals('what', $this->resource->getStoryWhat('what'));
+        $this->assertEquals('why', $this->resource->getStoryWhy('why'));
+    }
+
+    /**
+    * @test
+    */
+    public function returnsNonArrayCreatedBy()
+    {
+        $this->resource->setCreatedBy('foo');
+        $this->assertEquals('foo', $this->resource->getCreatedBy());
+    }
+
+    /**
+    * @test
+    */
     public function convertsToArray()
     {
         $array = $this->resource->toArray();

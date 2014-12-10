@@ -62,4 +62,14 @@ class ProductTest extends BaseTest {
         $this->assertArrayHasKey('name', $array);
         $this->assertArrayHasKey('archived', $array);
     }
+
+    /**
+    * @test
+    */
+    public function returnsUpdateArray()
+    {
+        $array = $this->resource->getUpdateArray();
+        $this->assertArrayHasKey('name', $array);
+        $this->assertArrayHasKey('archived', $array);
+    }
 }

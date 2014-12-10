@@ -23,6 +23,20 @@ class AnnotationTest extends BaseTest {
     /**
     * @test
     */
+    public function setsAndGetsProperties()
+    {
+        $props = ['action','body','id','person','verb'];
+        foreach($props as $prop) {
+            $set = 'set'.ucfirst($prop);
+            $get = 'get'.ucfirst($prop);
+            $this->assertNull($this->resource->{$set}('foo'));
+            $this->assertEquals('foo', $this->resource->{$get}());
+        }
+    }
+
+    /**
+    * @test
+    */
     public function annotationHasEndpoints()
     {
         $this->hasCollectionEndpoint($this->resource);

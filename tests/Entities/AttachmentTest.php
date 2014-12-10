@@ -2,6 +2,7 @@
 
 use Dugan\Sprintly\Entities\Attachment;
 use Dugan\Sprintly\Tests\BaseTest;
+use Dugan\Sprintly\Util;
 
 class AttachmentTest extends BaseTest {
     protected $resource;
@@ -18,6 +19,20 @@ class AttachmentTest extends BaseTest {
     public function attachmentIsInstantiated()
     {
         $this->assertInstanceOf('Dugan\Sprintly\Entities\Attachment', $this->resource);
+    }
+
+    /**
+    * @test
+    */
+    public function setsAndGetsProperties()
+    {
+        $props = ['created_at', 'created_by', 'link', 'id', 'item', 'name'];
+        foreach($props as $prop) {
+            $set = 'set'.Util::toCamel($prop);
+            $get = 'get'.Util::toCamel($prop);
+            $this->assertNull($this->resource->{$set}('foo'));
+            $this->assertEquals('foo', $this->resource->{$get}());
+        }
     }
 
     /**

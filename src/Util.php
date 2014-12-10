@@ -11,4 +11,9 @@ class Util
         }
         return implode('_', $ret);
     }
+
+    public static function toCamel($string)
+    {
+        return @preg_replace('/(^|_)([a-z])/e', 'strtoupper("\\2")', $string);
+    }
 }
